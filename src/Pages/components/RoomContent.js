@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Roomlist from "Pages/FindRoom/components/RoomList";
-import { roomData } from "Pages/FindRoom/RoomData";
+import Roomlist from "./RoomList";
+import { roomData } from "../RoomData";
 import styled from "styled-components";
 
 class RoomContent extends Component {

@@ -1,6 +1,6 @@
 /*global kakao*/
 import React, { Component } from "react";
-import { roomData } from "Pages/FindRoom/RoomData";
+import { roomData } from "../RoomData";
 import styled from "styled-components";
 
 class MapContent extends Component {

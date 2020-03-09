@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import FindRoomTop from "Pages/FindRoom/components/FindRoomTop";
-import RoomContent from "Pages/FindRoom/components/RoomContent";
-import MapContent from "Pages/FindRoom/components/MapContent";
+import FindRoomTop from "./components/FindRoomTop";
+import RoomContent from "./components/RoomContent";
+import MapContent from "./components/MapContent";
 
 import styled from "styled-components";
 
