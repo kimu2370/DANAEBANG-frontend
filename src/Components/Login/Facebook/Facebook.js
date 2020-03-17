@@ -16,28 +16,30 @@ export default class Facebook extends Component {
     this.setState(
       {
         fbToken: data.tokenDetail.accessToken
-      },
-      () => {
-        axios
-          .get("10.58.6.174:8000/account/facebook-signin", {
-            headers: {
-              Authorization: this.state.fbToken
-            }
-          })
-          .then(res => res.json())
-          .then(res => console.log(res))
-          .then(res => {
-            sessionStorage.setItem("fbToken", this.state.fbToken);
-          });
-        // .then(this.props.history.push("/"));
       }
+      // () => {
+      //   axios({
+      //     method: "GET",
+      //     url: "http://10.58.6.174:8000/account/facebook-signin",
+      //     headers: {
+      //       Authorization: this.state.fbToken
+      //     }
+      //   })
+      //     .then(res => res.json())
+      //     .then(res => console.log(res))
+      //     .then(res => {
+      //       sessionStorage.setItem("fbToken", this.state.fbToken);
+      //     });
+      //   // .then(this.props.history.push("/"));
     );
+    console.log(this.state);
   };
 
   handleError = error => {
     this.setState({ error });
   };
   render() {
+    console.log(this.state);
     return (
       <FacebookProvider appId="134253571347675">
         <Login

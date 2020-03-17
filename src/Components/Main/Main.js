@@ -11,7 +11,7 @@ import {
   Input,
   BlueSpan
 } from "Components/Main/Search.js";
-import { ReactComponent as easy_1 } from "Components/Main/Image/easy_1.png";
+import easy_1 from "./Image/easy_1.png";
 
 const SearchIcon = styled(Searchsvg)`
   position: absolute;
@@ -22,62 +22,62 @@ const SearchIcon = styled(Searchsvg)`
   height: 17px;
 `;
 
-// const CardImage = [
-//   {
-//     id: 1,
-//     image: "/Image/easy_1.png",
-//     category: "월세 + 관리비",
-//     roomtype: "월 50 이하 원룸"
-//   },
-//   {
-//     id: 2,
-//     image: "/src/Components/Main/Image/easy_2.png",
-//     category: "보증금",
-//     roomtype: "500 이하 원룸"
-//   },
-//   {
-//     id: 3,
-//     image: "/src/Components/Main/Image/easy_3.png",
-//     category: "반려동물",
-//     roomtype: "가능한 원룸"
-//   },
-//   {
-//     id: 4,
-//     image: "/src/Components/Main/Image/easy_1.png",
-//     category: "낭만적인",
-//     roomtype: "옥탑방 원룸"
-//   },
-//   {
-//     id: 5,
-//     image: "/src/Components/Main/Image/easy_5.png",
-//     category: "2억 이하",
-//     roomtype: "전세 투쓰리룸"
-//   },
-//   {
-//     id: 6,
-//     image: "/src/Components/Main/Image/easy_6.png",
-//     category: "전세자금대출",
-//     roomtype: "가능한 투쓰리룸"
-//   },
-//   {
-//     id: 7,
-//     image: "/src/Components/Main/Image/easy_7.png",
-//     category: "보증금",
-//     roomtype: "1천이하 오피스텔"
-//   },
-//   {
-//     id: 8,
-//     image: "/src/Components/Main/Image/easy_8.png",
-//     category: "단기임대",
-//     roomtype: "가능한 오피스텔"
-//   },
-//   {
-//     id: 9,
-//     image: "/src/Component/Main/Image/easy_9.png",
-//     category: "3억 이하",
-//     roomtype: "전세 아파트"
-//   }
-// ];
+const CardImage = [
+  {
+    id: 1,
+    backgroundImage: "./Image/easy_1.png",
+    category: "월세 + 관리비",
+    roomtype: "월 50 이하 원룸"
+  }
+  // {
+  //   id: 2,
+  //   image: "/src/Components/Main/Image/easy_2.png",
+  //   category: "보증금",
+  //   roomtype: "500 이하 원룸"
+  // },
+  // {
+  //   id: 3,
+  //   image: "/src/Components/Main/Image/easy_3.png",
+  //   category: "반려동물",
+  //   roomtype: "가능한 원룸"
+  // },
+  // {
+  //   id: 4,
+  //   image: "/src/Components/Main/Image/easy_1.png",
+  //   category: "낭만적인",
+  //   roomtype: "옥탑방 원룸"
+  // },
+  // {
+  //   id: 5,
+  //   image: "/src/Components/Main/Image/easy_5.png",
+  //   category: "2억 이하",
+  //   roomtype: "전세 투쓰리룸"
+  // },
+  // {
+  //   id: 6,
+  //   image: "/src/Components/Main/Image/easy_6.png",
+  //   category: "전세자금대출",
+  //   roomtype: "가능한 투쓰리룸"
+  // },
+  // {
+  //   id: 7,
+  //   image: "/src/Components/Main/Image/easy_7.png",
+  //   category: "보증금",
+  //   roomtype: "1천이하 오피스텔"
+  // },
+  // {
+  //   id: 8,
+  //   image: "/src/Components/Main/Image/easy_8.png",
+  //   category: "단기임대",
+  //   roomtype: "가능한 오피스텔"
+  // },
+  // {
+  //   id: 9,
+  //   image: "/src/Component/Main/Image/easy_9.png",
+  //   category: "3억 이하",
+  //   roomtype: "전세 아파트"
+  // }
+];
 export default class Main extends Component {
   render() {
     return (
@@ -104,7 +104,7 @@ export default class Main extends Component {
               <CardView>
                 <CardListWrapper>
                   <CardItem>
-                    <FirstImage />
+                    <img src={easy_1} alt="" />
                   </CardItem>
                 </CardListWrapper>
               </CardView>
@@ -173,9 +173,4 @@ const CardItem = styled.div`
   height: 172px;
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
-`;
-
-const FirstImage = styled.img`
-  color: yellow;
-  background-image: url(${easy_1});
 `;

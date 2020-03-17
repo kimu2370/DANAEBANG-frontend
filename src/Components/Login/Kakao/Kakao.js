@@ -1,46 +1,44 @@
 import React, { Component } from "react";
-import Kakao from "kakaojs";
 import styled from "styled-components";
 import axios from "axios";
-import { browserHistory } from "react-router";
+import Kakao from "react-kakao-login";
+import ReactDOM from "react-dom";
 class KakaoLogin extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      kakao: "",
+      id: "",
+      name: "",
+      provider: "",
       kakaoToken: ""
     };
   }
-  // 사용할 앱의 JavaScript 키를 설정해 주세요
-  componentDidMount() {
-    if (Kakao.Auth == null) {
-      Kakao.init("889a2555ed1ed3cfd6f80d9b187f256b");
-    }
-  }
-  loginWithKakao = () => {
-    Kakao.Auth.login({
-      success: authObj => {
-        Kakao.API.request({
-          url: "/v2/user/me",
-          success: function(res) {
-            alert(JSON.stringify(res));
-            alert(JSON.stringify(authObj));
-            console.log(authObj.access_token);
-          }
-        });
-      },
-      fail: function(err) {
-        console.log("에러", err);
-      }
+
+  responseKakao = res => {
+    console.log(res);
+    this.setState({
+      id: res.profile.id,
+      name: res.profile.properties.nickname,
+      provider: "kakao",
+      kakaoToken: res.response.access_token
     });
   };
 
+  responseFail = err => {
+    console.log(err);
+  };
+
   render() {
+    console.log(this.state);
     return (
       <>
-        <KakaoLoginBtn onClick={this.loginWithKakao}>
-          카카오톡으로 시작
-        </KakaoLoginBtn>
+        <KakaoLoginBtn
+          jsKey={"889a2555ed1ed3cfd6f80d9b187f256b"}
+          onSuccess={this.responseKakao}
+          onFailure={this.responseFail}
+          getProfile="true"
+          buttonText="카카오톡으로 시작"
+        />
       </>
     );
   }
@@ -48,7 +46,7 @@ class KakaoLogin extends Component {
 
 export default KakaoLogin;
 
-const KakaoLoginBtn = styled.button`
+const KakaoLoginBtn = styled(Kakao)`
   height: 50px;
   color: rgb(34, 34, 34);
   font-size: 14px;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Login from "Components/Login/Login";
 import styled from "styled-components";
+import Facebook from "Components/Login/Facebook/Facebook";
 
 const Stepper = () => {
   const [step, setstep] = useState(0);
@@ -11,8 +12,8 @@ const Stepper = () => {
       component: <Login />
     },
     {
-      title: "Step 2 "
-      //component: <SecondStep />
+      title: "FaceBook ",
+      component: <Facebook />
     },
     {
       title: "Step 3 "
