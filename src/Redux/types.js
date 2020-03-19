@@ -1,0 +1,3 @@
+export const SHOW_AGREEMENT = "SHOW_AGREEMENT";
+export const SHOW_LOGGEDIN = "SHOW_LOGGEDIN";
+export const SHOW_SIGNUP = "SHOW_SIGNUP";
