@@ -1,6 +1,8 @@
 /*global kakao*/
 import React, { Component } from "react";
 import { roomData } from "../RoomData";
+// import { connect } from "react-redux";
+// import { showRoomAction } from "Redux/Actions/showRoomAction";
 import styled from "styled-components";
 
 class MapContent extends Component {
