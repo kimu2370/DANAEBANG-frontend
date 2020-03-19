@@ -1,31 +1,38 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-
-export default class Roomlist extends Component {
+class Roomlist extends Component {
   render() {
     return (
-      <RoomList key={this.props.id}>
-        <RoomImg bg={this.props.roomImg}></RoomImg>
-        <RoomTxt>
-          <RoomTitle>
-            <span>{this.props.type}</span>
-            {this.props.price}
-          </RoomTitle>
-          <span>{this.props.floor}</span>
-          <span>{this.props.size}</span>
-          <TextWrap>{this.props.title}</TextWrap>
-        </RoomTxt>
-      </RoomList>
+      <>
+        <RoomList key={this.props.room_id}>
+          <RoomImg bg={this.props.roomImg}></RoomImg>
+          <RoomTxt>
+            <RoomTitle>
+              <span>{this.props.type}</span>
+              <span>{this.props.price}</span>
+              {this.props.month_price !== 0 && (
+                <span>/ {this.props.month_price}</span>
+              )}
+            </RoomTitle>
+            <DetailWrap>
+              <span>{this.props.floor}</span>
+              <span>{this.props.size}</span>
+            </DetailWrap>
+            <TextWrap>{this.props.title}</TextWrap>
+          </RoomTxt>
+        </RoomList>
+      </>
     );
   }
 }
 
 const RoomList = styled.li`
-  width: 25%;
+  width: 23%;
   padding: 5px;
   margin-left: 15px;
   margin-bottom: 50px;
   background-color: #fff;
+  float:left;
   &:hover {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   }
@@ -51,9 +58,16 @@ const RoomTitle = styled.h3`
     margin-right: 5px;
   }
 `;
+const DetailWrap = styled.div`
+
+`
 const TextWrap = styled.div`
   width: 200px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 `;
+
+
+
+export default Roomlist;
