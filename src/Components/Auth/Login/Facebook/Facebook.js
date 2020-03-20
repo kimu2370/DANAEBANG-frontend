@@ -7,7 +7,9 @@ export default class Facebook extends Component {
     super();
     this.state = {
       fbToken: "",
-      siteToken: ""
+      siteToken: "",
+      social_login_id: "",
+      social_login_type_id: ""
     };
   }
 
@@ -17,21 +19,21 @@ export default class Facebook extends Component {
     this.setState({
       fbToken: data.tokenDetail.accessToken
     });
-    console.log(this.state);
+
+    axios
+      .get("http://10.58.2.138:8000/account/facebook-signin", {
+        headers: {
+          Authorization: data.tokenDetail.accessToken
+        }
+      })
+      .then(res => res.data)
+      .then(res => {
+        this.setState({
+          social_login_id: res.social_login_data.social_login_id,
+          social_login_type_id: res.social_login_data.social_login_type_id
+        });
+      });
   };
-  //   axios.get("http://10.58.3.222:8000/account/kakao-login", {
-  //    headers: {
-  //     Authorization: data.tokenDetail.accessToken
-  //     }
-  //    });
-  //    .then(res => res.data)
-  //    .then(res => {
-  //      this.setState({
-  //        social_login_id: res.social_login_data.social_login_id,
-  //       social_login_type: res.social_login_data.social_login_type_id
-  //      });
-  //   });
-  // };
 
   //* request in the localstorage(myproject token)
   //* if u have token then u are logged in

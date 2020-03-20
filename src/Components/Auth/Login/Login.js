@@ -50,8 +50,8 @@ const Login = () => {
   };
 
   const handleOtherLogin = e => {
-    console.log(e.target.name);
-    console.log(loginStep);
+    // console.log(e.target.name);
+    // console.log(loginStep);
 
     e.target.name = setLoginStep(1);
   };

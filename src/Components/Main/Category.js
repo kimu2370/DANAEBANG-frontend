@@ -62,22 +62,22 @@ export default function ImageCard() {
     }
   ];
 
-  function Arrow(props) {
-    const { className, style, onClick } = props;
-    return (
-      <SlickArrow
-        className={className}
-        style={{ ...style, display: "block", background: "white" }}
-        onClick={onClick}
-      />
-    );
-  }
+  // function Arrow(props) {
+  //   const { className, style, onClick } = props;
+  //   return (
+  //     <SlickArrow
+  //       className={className}
+  //       style={{ ...style, display: "block", background: "white" }}
+  //       onClick={onClick}
+  //     />
+  //   );
+  // }
   const settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 6,
-    slidesToScroll: 1,
-    nextArrow: <Arrow />
+    slidesToScroll: 1
+    //nextArrow: <Arrow />
   };
   return (
     <div>

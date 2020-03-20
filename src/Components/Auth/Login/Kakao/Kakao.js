@@ -38,6 +38,12 @@ class KakaoLogin extends Component {
       });
   };
 
+  // handleRegister = () => {
+  //   if (this.state === true) {
+  //     e.target.name = setLoginStep(1);
+  //   }
+  // };
+
   responseFail = err => {
     console.log(err);
   };
