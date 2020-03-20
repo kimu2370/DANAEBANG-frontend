@@ -22,9 +22,11 @@ const ImageView = props => {
             <SmallView noImg={noImg} />
           </>
         )}
-        <More>
-          <p>20개 전체보기</p>
-        </More>
+        {info && info.length > 5 && (
+          <More>
+            <p>전체보기</p>
+          </More>
+        )}
       </ImgView>
     </Box>
   );

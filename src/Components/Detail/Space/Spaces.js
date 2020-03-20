@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import { selectPyeongAction } from "Redux/Actions/selectPyeongAction";
-import { connect } from "react-redux";
+
 const Spaces = props => {
   const [isMeter, setMeter] = useState(true);
   const [isPyeong, setPyeong] = useState(false);

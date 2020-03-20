@@ -1,73 +1,85 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
+import { INFO_IMG } from "./Data";
 import { ReactComponent as NoLeftImg } from "Components/Detail/Images/nolayout.svg";
 import { ReactComponent as Ichange } from "Components/Detail/Images/change.svg";
-import { INFO_IMG } from "./Data";
-import { connect } from "react-redux";
+
 const InfoLeft = props => {
   const [change, setChange] = useState(false);
   const info = props.pyeongInfo;
-  // const pyeong = Math.round(info.room_size);
-  return (
-    <>
-      {info && (
-        <Box>
-          <Header>면적정보</Header>
-          <Wrap>
-            {/* <Layout />
-        <LayoutFooter>
-          <span>기본형</span>
-        </LayoutFooter> */}
 
-            <NoLayout>
-              <NoLeftImg />
-              <p>평면도를 준비중입니다.</p>
-            </NoLayout>
-            <InfoWrap>
-              <TextInfo>
-                <Name>
-                  전용/
-                  {info.contract_size
-                    ? "계약면적"
-                    : info.provision_size && "공급면적"}
-                </Name>
-                <Value>
-                  {info.room_size + "㎡"} /
-                  {info.contract_size
-                    ? info.contract_size
-                    : info.provision_size && info.provision_size}
-                  ㎡
-                </Value>
-                <ChangeBtn onClick={() => setChange(!change)}>
-                  <Ichange />
-                  <span>{change ? "평" : "㎡"}</span>
-                </ChangeBtn>
-              </TextInfo>
-              <TextInfo>
-                <Name>관리비(연평균)</Name>
-                <Value> - 원</Value>
-              </TextInfo>
-              {/* bath_num, entrance_type*/}
-              {INFO_IMG.map((item, i) => (
-                <Info key={i} src={item.src}>
-                  <div></div>
-                  <InfoTitle>{item.id === i && item.title}</InfoTitle>
-                  <InfoData>
-                    {item.id === 0
-                      ? info.beds_num + "개"
-                      : item.id === 1
-                      ? info.bath_num + "개"
-                      : item.id === 2
-                      ? info.entrance_type
-                      : item.id === 3 && props && props.householdNum + "세대"}
-                  </InfoData>
-                </Info>
-              ))}
-            </InfoWrap>
-          </Wrap>
-        </Box>
-      )}
-    </>
+  return (
+    <Box>
+      <Header>면적정보</Header>
+      <Wrap>
+        {info.lay_out_image_URL ? (
+          <>
+            <Layout src={info.lay_out_image_URL} />
+            <LayoutFooter>
+              <span>기본형</span>
+            </LayoutFooter>
+          </>
+        ) : (
+          <NoLayout>
+            <NoLeftImg />
+            <p>평면도를 준비중입니다.</p>
+          </NoLayout>
+        )}
+        <InfoWrap>
+          <TextInfo>
+            <Name>
+              전용/
+              {info.contract_size
+                ? "계약면적"
+                : info.provision_size && "공급면적"}
+            </Name>
+            <Value>
+              {!change
+                ? info.room_size + "㎡"
+                : Math.round(Number(info.room_size) * 0.3025) + "평"}
+              /
+              {info.contract_size
+                ? info.contract_size && !change
+                  ? info.contract_size + "㎡"
+                  : Math.round(Number(info.contract_size) * 0.3025) + "평"
+                : info.provision_size && !change
+                ? info.provision_size + "㎡"
+                : Math.round(Number(info.provision_size) * 0.3025) + "평"}
+            </Value>
+            <ChangeBtn onClick={() => setChange(!change)}>
+              <Ichange />
+              <span>{change ? "평" : "㎡"}</span>
+            </ChangeBtn>
+          </TextInfo>
+          <TextInfo>
+            <Name>관리비(연평균)</Name>
+            <Value>
+              {info.maintenance_price
+                ? parseInt(info.maintenance_price).toLocaleString()
+                : "- "}
+              원
+            </Value>
+          </TextInfo>
+          {/* bath_num, entrance_type*/}
+          {INFO_IMG.map((item, i) => (
+            <Info key={i} src={item.src}>
+              <div></div>
+              <InfoTitle>{item.id === i && item.title}</InfoTitle>
+              <InfoData>
+                {item.id === 0
+                  ? info.beds_num + "개"
+                  : item.id === 1
+                  ? info.bath_num + "개"
+                  : item.id === 2
+                  ? info.entrance_type
+                  : item.id === 3 && props && props.householdNum + "세대"}
+              </InfoData>
+            </Info>
+          ))}
+        </InfoWrap>
+      </Wrap>
+    </Box>
   );
 };
 
@@ -118,8 +130,7 @@ const Layout = styled.div`
   width: 404px;
   height: 378px;
   margin: 0px auto;
-  background: url(https://d2o59jgeq8ig2.cloudfront.net/space/1024/46249f29-cd36-4cdd-ac87-5d932cfcf015)
-    center center / contain no-repeat;
+  background: url(${props => props.src}) center center / contain no-repeat;
 `;
 const LayoutFooter = styled.div`
   height: 22px;
@@ -165,6 +176,11 @@ const NoLayout = styled.div`
 const InfoWrap = styled.ul`
   width: 100%;
   border-top: 1px solid rgb(228, 228, 228);
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
 `;
 
 const TextInfo = styled.li`

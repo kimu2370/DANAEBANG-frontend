@@ -1,6 +1,7 @@
 import React from "react";
-import { ReactComponent as IQue } from "Components/Detail/Images/question.svg";
 import styled from "styled-components";
+import { ReactComponent as IQue } from "Components/Detail/Images/question.svg";
+
 const ComplexDetail = props => {
   const { info } = props;
   return (
@@ -10,11 +11,11 @@ const ComplexDetail = props => {
           <Th>건물유형</Th>
           <Tr>{info.complex_type}</Tr>
           <Th>건설사</Th>
-          <Tr>(주)힘찬건설</Tr>
+          <Tr>{info.provider_name}</Tr>
           <Th>난방</Th>
           <Tr>{info.heat_type}</Tr>
           <Th>연료</Th>
-          <Tr>열병합</Tr>
+          <Tr>{info.fuel_type}</Tr>
         </Row>
         <Row>
           <Th>단지타입</Th>

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-const ComplexPrice = () => {
+
+const ComplexPrice = props => {
   return (
     <>
       <Box>
@@ -17,9 +18,17 @@ const ComplexPrice = () => {
             <SubBox>
               <Text>이 지역 평당가</Text>
               <Type>매매</Type>
-              <Value>597만/3.3m²당</Value>
+              <Value>
+                {props.build_cov_ratio
+                  ? parseInt(props.build_cov_ratio) + "만/3.3m²당"
+                  : "-"}
+              </Value>
               <Type>전세</Type>
-              <Value>541만/3.3m²당</Value>
+              <Value>
+                {props.floor_area_index
+                  ? parseInt(props.floor_area_index) + "만/3.3m²당"
+                  : "-"}
+              </Value>
             </SubBox>
           </PriceBox>
         </Wrap>
@@ -49,6 +58,11 @@ const Wrap = styled.div`
   width: 1180px;
   margin: 0px auto;
   padding: 0px 165px;
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
 `;
 const PriceBox = styled.div`
   display: inline-block;
@@ -71,11 +85,6 @@ const SubBox = styled.div`
   & + div {
     padding: 20px 0px 20px 11px;
     border-top: 1px solid rgb(228, 228, 228);
-  }
-  &::after {
-    display: block;
-    content: "";
-    clear: both;
   }
 `;
 

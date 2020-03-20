@@ -83,7 +83,7 @@ const Box = styled.div`
   margin: 0px auto;
 `;
 const Wrap = styled.div`
-  margin-top: 25px;
+  margin-top: 100px;
   margin-bottom: 17px;
   & h1 {
     margin-top: 2px;

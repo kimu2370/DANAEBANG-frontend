@@ -1,4 +1,4 @@
-export const COMPLEX_NAV = [
+export const complexNavData = [
   "가격정보",
   "평형정보",
   "위치 및 주변 시설",
