@@ -9,13 +9,13 @@ class MapContent extends Component {
       clusterData: [], //클러스터 눌렀을 때 들어오는 데이터
       lat: 37.506502,
       lng: 127.053617,
-      roomlength: ""
+      roomlength: 0
     };
   }
   componentDidMount() {
-    // kakao.maps.load(() => {
+    kakao.maps.load(() => {
       this.mapSide();
-    // });
+    });
   }
   mapSide = () => {
     let container = document.getElementById("Mymap");
@@ -29,8 +29,8 @@ class MapContent extends Component {
     this.map = new kakao.maps.Map(container, options);
     // map drag시 변경되는 중심좌표
     kakao.maps.event.addListener(this.map, "dragend", () => {
-      // 지도 중심좌표를 얻어옵니다
-      var latlng = this.map.getCenter();
+      // 지도 중심좌표를 얻어오기
+      const latlng = this.map.getCenter();
       this.setState({
         lat: latlng.getLat(),
         lng: latlng.getLng()
@@ -44,6 +44,7 @@ class MapContent extends Component {
       map: this.map,
       averageCenter: true,
       minLevel: 3,
+      gridSize: 200,
       disableClickZoom: true
     });
     this.getRooms(this.clusterer);
@@ -68,18 +69,6 @@ class MapContent extends Component {
           this.setState({
             roomlength: markers.length
           });
-          //클러스터러 클릭이벤트
-          // kakao.maps.event.addListener(clusterer, "clusterclick", cluster => {
-          // const markerInfo = cluster.getMarkers();
-          // let markerArray = [];
-          // for (var idx = 0; idx < markerInfo.length; idx++) {
-          //   markerArray.push(markerInfo[idx].getPosition());
-          // }
-
-          // map 줌인
-          //   this.map.setLevel(this.map.getLevel() - 1);
-          //   this.map.setCenter(cluster.getCenter());
-          // });
           //오버레이관련함수
           this.overlayContents = () => {
             fetch(
@@ -151,13 +140,30 @@ class MapContent extends Component {
         });
 
         clusterer.addMarkers(markers);
+        // 클러스터러 클릭이벤트
+        kakao.maps.event.addListener(clusterer, "clusterclick", cluster => {
+          const markerInfo = cluster.getMarkers();
+          let markerArray = [];
+          for (var idx = 0; idx < markerInfo.length; idx++) {
+            markerArray.push(markerInfo[idx].getPosition());
+          }
+          // const leng = markerArray.length;
+          console.log("array", markerArray);
+          this.setState({
+            clusterData: markerArray
+          });
+          // map 줌인
+          this.map.setLevel(this.map.getLevel() - 1);
+          this.map.setCenter(cluster.getCenter());
+        });
       });
 
     this.toParents = () => {
       this.props.mapdatafromparents(
         this.state.lat,
         this.state.lng,
-        this.state.roomlength
+        this.state.roomlength,
+        this.state.clusterData
       );
     };
     this.toParents();
@@ -170,12 +176,7 @@ class MapContent extends Component {
 
 const MapContents = styled.div`
   width: 100%;
-  height:100vh;
-
-
+  height: 100vh;
 `;
-// const mapStateToProps = state => {
-//   return { showRoom: state.showRoom };
-// };
-// export default connect(mapStateToProps, { showRoomAction })(MapContent);
+
 export default MapContent;

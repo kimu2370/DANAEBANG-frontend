@@ -36,12 +36,12 @@ class RoomContent extends Component {
   }
 }
 const TitleDiv = styled.div`
-  width:100%;
+  width: 100%;
   padding: 33px 0 20px;
   margin: 120px 30px 0;
   border-bottom: 1px solid #eee;
-  background-color:#fff;
-  position:fixed;
+  background-color: #fff;
+  position: fixed;
   /* top:10px; */
   & ul {
     display: flex;
@@ -75,7 +75,7 @@ const RoomContentWrap = styled.div`
 
 const RoomListWrap = styled.ul`
   width: 100%;
-  margin-top:190px;
+  margin-top: 190px;
   padding: 0 20px;
   max-width: 1195px;
 `;
