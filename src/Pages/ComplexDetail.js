@@ -15,12 +15,12 @@ import Location from "Components/Detail/Location";
 
 const ComplexDetail = props => {
   const [info, setInfo] = useState({});
-  // console.log(props);
+  // console.log();
   useEffect(() => {
     axios
-      .get(`${COMPLEX_DETAIL_URL}?type=complex&id=230`)
+      .get(`${COMPLEX_DETAIL_URL}&id=${props.match.params.id}`)
       .then(res => setInfo(res.data.complex_detail));
-  }, []);
+  }, [props.match.params.id]);
   // <ImageView imgUrl={info.image_urls} />
   // <ImageView info={info.image_urls} />
   // info => 단지 거래 상세 정보

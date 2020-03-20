@@ -334,7 +334,7 @@ const InfoRight = props => {
                           realData[0].hasOwnProperty("date") &&
                           realData[0].histories.map((item, i) => {
                             return isRent ? (
-                              <tr>
+                              <tr key={i}>
                                 <td>{item.date}</td>
                                 <td className="Price">
                                   {item.deposit / 10000 + "억"}
