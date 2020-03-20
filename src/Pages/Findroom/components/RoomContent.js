@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Roomlist from "Pages/FindRoom/components/RoomList";
-import { roomData } from "Pages/FindRoom/RoomData";
+import Roomlist from "Pages/Findroom/components/RoomList";
+
 import styled from "styled-components";
 
 class RoomContent extends Component {
@@ -9,42 +9,40 @@ class RoomContent extends Component {
       <>
         <TitleDiv>
           <ul>
-            <li>전체 방 {roomData.length}개</li>
+            <li>전체 방 {this.props.roomlength}개</li>
             <li>단지 0개</li>
           </ul>
         </TitleDiv>
         <RoomContentWrap>
           <RoomListWrap>
-            {roomData.map(el => (
+            {this.props.roomDatafromparents.map(el => (
               <Roomlist
-                id={el.id}
-                roomImg={el.roomImg}
-                type={el.type}
-                price={el.price}
-                floor={el.floor}
-                size={el.size}
+                key={el}
+                id={el.room_id}
+                roomImg={el.image_url}
+                type={el.trade_type_str}
+                price={el.trade_deposit}
+                floor={el.floor_str}
+                size={el.room_size}
                 title={el.title}
+                month_price={el.trade_fee}
               />
             ))}
           </RoomListWrap>
         </RoomContentWrap>
-        <PageSide>
-          <Pagenation>
-            <button>이전</button>
-            <ul>
-              <li></li>
-            </ul>
-            <button>다음</button>
-          </Pagenation>
-        </PageSide>
+        <PageSide></PageSide>
       </>
     );
   }
 }
 const TitleDiv = styled.div`
+  width: 100%;
   padding: 33px 0 20px;
-  margin: 0 30px;
+  margin: 120px 30px 0;
   border-bottom: 1px solid #eee;
+  background-color: #fff;
+  position: fixed;
+  /* top:10px; */
   & ul {
     display: flex;
     & li {
@@ -70,22 +68,23 @@ const TitleDiv = styled.div`
 `;
 const RoomContentWrap = styled.div`
   width: 100%;
-  padding: 20px 30px 0 15px;
+  padding: 20px 0 0 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 `;
 
 const RoomListWrap = styled.ul`
   width: 100%;
-  display: flex;
+  margin-top: 190px;
+  padding: 0 20px;
+  max-width: 1195px;
 `;
 
 const PageSide = styled.div`
   padding: 33px 0 20px;
   margin: 0 30px;
   border-top: 1px solid #eee;
-`;
-const Pagenation = styled.div`
-  height: 30px;
-  display: flex;
+  clear: both;
 `;
 
 export default RoomContent;

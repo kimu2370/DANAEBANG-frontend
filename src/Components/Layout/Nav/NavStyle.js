@@ -9,6 +9,7 @@ const Navbar = styled.nav`
   padding: 0px 30px;
   border-bottom: 1px solid rgb(235, 235, 235);
   display: flex;
+  position: fixed;
 `;
 
 const LeftDivFlex = styled.div`
