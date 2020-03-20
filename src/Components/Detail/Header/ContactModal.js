@@ -1,7 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
 import styled, { keyframes } from "styled-components";
 import { contactCloseModalAction } from "Redux/Actions/contactCloseModalAction";
-import { connect } from "react-redux";
 
 const ContactModal = props => {
   // console.log(props);

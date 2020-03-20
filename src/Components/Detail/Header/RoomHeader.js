@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
+import { contactOpenModalAction } from "Redux/Actions/contactOpenModalAction";
 import { ReactComponent as Ichange } from "Components/Detail/Images/change.svg";
 import { ReactComponent as Icontact } from "Components/Detail/Images/contact.svg";
 import { ReactComponent as Icopy } from "Components/Detail/Images/copy.svg";
 import { ReactComponent as Iheart } from "Components/Detail/Images/heart.svg";
 import { ReactComponent as Ireport } from "Components/Detail/Images/report.svg";
-import { contactOpenModalAction } from "Redux/Actions/contactOpenModalAction";
-import { connect } from "react-redux";
 
 const RoomHeader = props => {
   const [like, setLike] = useState(false);

@@ -1,7 +1,8 @@
 import React from "react";
-import styled from "styled-components";
 import { FiHeart, FiPaperclip } from "react-icons/fi";
-import { COMPLEX_NAV } from "Components/Detail/Nav/Data";
+import styled from "styled-components";
+import { complexNavData } from "Components/Detail/Nav/Data";
+
 const ComplexNav = () => {
   return (
     <>
@@ -23,7 +24,7 @@ const ComplexNav = () => {
           </Content>
         </InfoBar>
         <Tabs>
-          {COMPLEX_NAV.map((item, i) => (
+          {complexNavData.map((item, i) => (
             <Tab key={i} active>
               {item}
             </Tab>

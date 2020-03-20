@@ -1,47 +1,50 @@
 import React, { useState, useEffect } from "react";
-import Layout from "Components/Layout/Layout";
 import axios from "axios";
+import { COMPLEX_DETAIL_URL } from "Config";
+
+import Layout from "Components/Layout/Layout";
 import ComplexHeader from "Components/Detail/Header/ComplexHeader";
 import ComplexTable from "Components/Detail/Detail/ComplexTable";
 import ImageView from "Components/Detail/ImageView/ImageView";
 import ImgViewModal from "Components/Detail/ImageView/ImgViewModal";
 import Nav from "Components/Detail/Nav/ComplexNav";
-import DetailContainer from "Components/Detail/Nav/DetailContainer";
+// import DetailContainer from "Components/Detail/Nav/DetailContainer";
 import ComplexPrice from "Components/Detail/Price/ComplexPrice";
 import Space from "Components/Detail/Space/Space";
-import styled from "styled-components";
-import { COMPLEX_DETAIL_URL } from "Config";
+import Location from "Components/Detail/Location";
 
-const ComplexDetail = () => {
+const ComplexDetail = props => {
   const [info, setInfo] = useState({});
+  // console.log(props);
   useEffect(() => {
-    const fetchComplexInfo = async () => {
-      const result = await axios.get(
-        `${COMPLEX_DETAIL_URL}/room/detail?type=complex&id=510`
-      );
-      setInfo(result.data.complex_detail);
-    };
-    fetchComplexInfo();
+    axios
+      .get(`${COMPLEX_DETAIL_URL}?type=complex&id=230`)
+      .then(res => setInfo(res.data.complex_detail));
   }, []);
+  // <ImageView imgUrl={info.image_urls} />
+  // <ImageView info={info.image_urls} />
+  // info => 단지 거래 상세 정보
   return (
     <Layout>
-      <Div>
-        <ComplexHeader info={info} />
-        <ComplexTable info={info} />
-        <ImageView info={info.image_urls} />
-        <ImgViewModal info={info.image_urls} />
-        <Nav></Nav>
-        <DetailContainer>
-          <ComplexPrice />
-          <Space info={info} />
-        </DetailContainer>
-      </Div>
+      {info.image_urls && (
+        <>
+          <ComplexHeader info={info} />
+          <ComplexTable info={info} />
+          <ImageView info={info.image_urls} />
+          <ImgViewModal info={info.image_urls} />
+          <Nav />
+          <div>
+            <ComplexPrice
+              build_cov_ratio={info.build_cov_ratio}
+              floor_area_index={info.floor_area_index}
+            />
+            <Space info={info} />
+          </div>
+          <Location />
+        </>
+      )}
     </Layout>
   );
 };
 
 export default ComplexDetail;
-
-const Div = styled.div`
-  width: 100%;
-`;
