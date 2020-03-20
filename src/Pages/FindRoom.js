@@ -12,7 +12,8 @@ class FindRoom extends Component {
       lat: 37.506502,
       lng: 127.053617,
       roomData: [],
-      roomlength: ""
+      roomlength: 0,
+      clusterData: []
     };
   }
 
@@ -21,7 +22,12 @@ class FindRoom extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.lat !== this.state.lat || prevState.lng !== this.state.lng) {
+    if (
+      prevState.lat !== this.state.lat ||
+      prevState.lng !== this.state.lng
+      // ||
+      // prevState.clusterData !== this.state.clusterData
+    ) {
       this.setState({
         roomData: []
       });
@@ -42,9 +48,30 @@ class FindRoom extends Component {
       });
   };
 
+  //클러스터 클릭시 data 새로 만들기
+  // clusterClick = () => {
+  //   const test = [];
+  //   for (let i = 0; i < this.state.clusterData.length; i++) {
+  //     let c = Number(this.state.clusterData[i].Ga.toFixed(7));
+  //     let d = Number(this.state.clusterData[i].Ha.toFixed(8));
+
+  //     for (let j = 0; j < this.state.roomData.length; j++) {
+  //       if (
+  //         d === this.state.roomData[j].latitude &&
+  //         c === this.state.roomData[j].longitude
+  //       ) {
+  //         test.push(this.state.roomData[j]);
+  //         console.log(test);
+  //         //        console.log(d === b[j].latitude && c === b[j].longitude)
+  //         //        console.log(i, j, d, b[j].latitude, c, b[j].longitude)
+  //       }
+  //     }
+  //   }
+  // };
+
   //map과 연결하여 state 관리하는 함수
-  parentsData = (lat, lng, roomlength) => {
-    this.setState({ lat, lng, roomlength });
+  parentsData = (lat, lng, roomlength, clusterData) => {
+    this.setState({ lat, lng, roomlength, clusterData });
   };
 
   render() {

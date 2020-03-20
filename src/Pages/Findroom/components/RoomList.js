@@ -1,10 +1,32 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import styled from "styled-components";
+
 class Roomlist extends Component {
+  constructor() {
+    super();
+    this.state = {
+      roomid: 0
+    };
+  }
+  roomListPath = num => {
+    this.setState(
+      {
+        roomid: num
+      },
+      () => {
+        console.log(this.state.roomid);
+        this.props.history.push("/detail/" + this.state.roomid);
+      }
+    );
+  };
   render() {
     return (
       <>
-        <RoomList key={this.props.room_id}>
+        <RoomList
+          key={this.props.room_id}
+          onClick={() => this.roomListPath(this.props.id)}
+        >
           <RoomImg bg={this.props.roomImg}></RoomImg>
           <RoomTxt>
             <RoomTitle>
@@ -32,7 +54,8 @@ const RoomList = styled.li`
   margin-left: 15px;
   margin-bottom: 50px;
   background-color: #fff;
-  float:left;
+  cursor: pointer;
+  float: left;
   &:hover {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   }
@@ -58,9 +81,7 @@ const RoomTitle = styled.h3`
     margin-right: 5px;
   }
 `;
-const DetailWrap = styled.div`
-
-`
+const DetailWrap = styled.div``;
 const TextWrap = styled.div`
   width: 200px;
   text-overflow: ellipsis;
@@ -68,6 +89,5 @@ const TextWrap = styled.div`
   overflow: hidden;
 `;
 
-
-
-export default Roomlist;
+// export default Roomlist;
+export default withRouter(Roomlist);
