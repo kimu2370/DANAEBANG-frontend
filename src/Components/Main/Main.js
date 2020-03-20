@@ -11,7 +11,16 @@ import {
   Input,
   BlueSpan
 } from "Components/Main/Search.js";
-import { ReactComponent as easy_1 } from "Components/Main/Image/easy_1.png";
+import { easy_1 } from "./Image/easy_1.png";
+import { easy_2 } from "./Image/easy_2.png";
+import { easy_3 } from "./Image/easy_3.png";
+import { easy_4 } from "./Image/easy_4.png";
+import { easy_5 } from "./Image/easy_5.png";
+import { easy_6 } from "./Image/easy_6.png";
+import { easy_7 } from "./Image/easy_7.png";
+import { easy_8 } from "./Image/easy_8.png";
+import { easy_9 } from "./Image/easy_9.png";
+import ImageCard from "./Category";
 
 const SearchIcon = styled(Searchsvg)`
   position: absolute;
@@ -22,62 +31,6 @@ const SearchIcon = styled(Searchsvg)`
   height: 17px;
 `;
 
-// const CardImage = [
-//   {
-//     id: 1,
-//     image: "/Image/easy_1.png",
-//     category: "월세 + 관리비",
-//     roomtype: "월 50 이하 원룸"
-//   },
-//   {
-//     id: 2,
-//     image: "/src/Components/Main/Image/easy_2.png",
-//     category: "보증금",
-//     roomtype: "500 이하 원룸"
-//   },
-//   {
-//     id: 3,
-//     image: "/src/Components/Main/Image/easy_3.png",
-//     category: "반려동물",
-//     roomtype: "가능한 원룸"
-//   },
-//   {
-//     id: 4,
-//     image: "/src/Components/Main/Image/easy_1.png",
-//     category: "낭만적인",
-//     roomtype: "옥탑방 원룸"
-//   },
-//   {
-//     id: 5,
-//     image: "/src/Components/Main/Image/easy_5.png",
-//     category: "2억 이하",
-//     roomtype: "전세 투쓰리룸"
-//   },
-//   {
-//     id: 6,
-//     image: "/src/Components/Main/Image/easy_6.png",
-//     category: "전세자금대출",
-//     roomtype: "가능한 투쓰리룸"
-//   },
-//   {
-//     id: 7,
-//     image: "/src/Components/Main/Image/easy_7.png",
-//     category: "보증금",
-//     roomtype: "1천이하 오피스텔"
-//   },
-//   {
-//     id: 8,
-//     image: "/src/Components/Main/Image/easy_8.png",
-//     category: "단기임대",
-//     roomtype: "가능한 오피스텔"
-//   },
-//   {
-//     id: 9,
-//     image: "/src/Component/Main/Image/easy_9.png",
-//     category: "3억 이하",
-//     roomtype: "전세 아파트"
-//   }
-// ];
 export default class Main extends Component {
   render() {
     return (
@@ -100,15 +53,7 @@ export default class Main extends Component {
               <CategorySpan>쉬운 방찾기</CategorySpan>
               <CategoryP>방 찾기 초보를 위한 초간단 솔루션!</CategoryP>
             </CategoryTextDiv>
-            <CardWrapper>
-              <CardView>
-                <CardListWrapper>
-                  <CardItem>
-                    <FirstImage />
-                  </CardItem>
-                </CardListWrapper>
-              </CardView>
-            </CardWrapper>
+            <ImageCard />
           </CategoryWrapper>
         </Layout>
       </div>
@@ -144,38 +89,4 @@ const CategoryP = styled.p`
   font-weight: 300;
   line-height: 24px;
   text-align: center;
-`;
-
-const CardWrapper = styled.div`
-  width: 100%;
-  height: 172px;
-  margin-top: 26px;
-  position: relative;
-`;
-
-const CardView = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-`;
-
-const CardListWrapper = styled.div`
-  width: 1777px;
-  height: 172px;
-  position: relative;
-  right: 0px;
-  transition: right 300ms ease-out 0s;
-`;
-
-const CardItem = styled.div`
-  width: 185px;
-  height: 172px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 5px;
-`;
-
-const FirstImage = styled.img`
-  color: yellow;
-  background-image: url(${easy_1});
 `;

@@ -9,7 +9,9 @@ const GlobalStyles = createGlobalStyle`
 ${reset}
 * {
     box-sizing: border-box;
-  }
+    margin: 0px;
+    padding: 0px;
+}
   a {
     color: inherit;
     text-decoration: none;

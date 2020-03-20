@@ -6,38 +6,44 @@ export default class Facebook extends Component {
   constructor() {
     super();
     this.state = {
-      fbToken: ""
+      fbToken: "",
+      siteToken: "",
+      social_login_id: "",
+      social_login_type_id: ""
     };
   }
 
   handleResponse = data => {
-    console.log(data.tokenDetail.accessToken);
-    console.log(data);
-    this.setState(
-      {
-        fbToken: data.tokenDetail.accessToken
-      },
-      () => {
-        axios
-          .get("10.58.6.174:8000/account/facebook-signin", {
-            headers: {
-              Authorization: this.state.fbToken
-            }
-          })
-          .then(res => res.json())
-          .then(res => console.log(res))
-          .then(res => {
-            sessionStorage.setItem("fbToken", this.state.fbToken);
-          });
-        // .then(this.props.history.push("/"));
-      }
-    );
+    // console.log(data.tokenDetail.accessToken);
+    // console.log(data);
+    this.setState({
+      fbToken: data.tokenDetail.accessToken
+    });
+
+    axios
+      .get("http://10.58.2.138:8000/account/facebook-signin", {
+        headers: {
+          Authorization: data.tokenDetail.accessToken
+        }
+      })
+      .then(res => res.data)
+      .then(res => {
+        this.setState({
+          social_login_id: res.social_login_data.social_login_id,
+          social_login_type_id: res.social_login_data.social_login_type_id
+        });
+      });
   };
+
+  //* request in the localstorage(myproject token)
+  //* if u have token then u are logged in
+  //?? get the token then show the agreement page.
 
   handleError = error => {
     this.setState({ error });
   };
   render() {
+    // console.log(this.state);
     return (
       <FacebookProvider appId="134253571347675">
         <Login
