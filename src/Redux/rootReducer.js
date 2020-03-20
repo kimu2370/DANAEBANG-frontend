@@ -7,6 +7,6 @@ import selectPyeong from "Redux/Reducers/selectPyeong";
 export const rootReducer = combineReducers({
   contactShowModal,
   imgShowModal,
-  selectPyeong
+  selectPyeong,
   LoginModal
 });
