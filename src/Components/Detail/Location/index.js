@@ -1,3 +1,3 @@
-import Location from "Components/Detail/Location/Location";
+import Location from "./Location";
 
 export default Location;

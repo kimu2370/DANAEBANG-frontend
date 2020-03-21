@@ -6,7 +6,7 @@ import { ReactComponent as Icopy } from "Components/Detail/Images/copy.svg";
 const ComplexHeader = props => {
   const [like, setLike] = useState(false);
   const { info } = props;
-  // console.log(info);
+
   return (
     <Block>
       <Box>

@@ -40,6 +40,14 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, { imgOpenModalAction })(ImageView);
 
+const clearFix = `
+&::after {
+  display: block;
+  content: "";
+  clear: both;
+}
+`;
+
 const Box = styled.div`
   width: 1180px;
   position: relative;
@@ -52,11 +60,7 @@ const ImgView = styled.div`
   position: relative;
   cursor: pointer;
   /* 클리어 속성으로 밑에 내용 따라붙지 않게 하기 */
-  &::after {
-    display: block;
-    content: "";
-    clear: both;
-  }
+  ${clearFix}
 `;
 const BigView = styled.div`
   float: left;
