@@ -15,9 +15,9 @@ class RoomContent extends Component {
         </TitleDiv>
         <RoomContentWrap>
           <RoomListWrap>
-            {this.props.roomDatafromparents.map(el => (
+            {this.props.roomDatafromparents.map((el, i) => (
               <Roomlist
-                key={el}
+                key={i}
                 id={el.room_id}
                 roomImg={el.image_url}
                 type={el.trade_type_str}

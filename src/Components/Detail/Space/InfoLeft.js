@@ -4,11 +4,10 @@ import styled from "styled-components";
 import { INFO_IMG } from "./Data";
 import { ReactComponent as NoLeftImg } from "Components/Detail/Images/nolayout.svg";
 import { ReactComponent as Ichange } from "Components/Detail/Images/change.svg";
-
+import { clearFix } from "Styles/clearFix";
 const InfoLeft = props => {
   const [change, setChange] = useState(false);
   const info = props.pyeongInfo;
-
   return (
     <Box>
       <Header>면적정보</Header>
@@ -101,7 +100,7 @@ const Box = styled.div`
   border-color: rgb(229, 229, 229);
   border-image: initial;
   border-radius: 4px 0px 0px 4px;
-  & + div {
+  + div {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
     border-top-right-radius: 4px;
@@ -136,7 +135,7 @@ const LayoutFooter = styled.div`
   height: 22px;
   text-align: center;
   margin: 30px auto 25px;
-  & > span {
+  > span {
     line-height: 22px;
     font-size: 15px;
     font-weight: 500;
@@ -151,13 +150,13 @@ const NoLayout = styled.div`
   background-color: rgb(255, 255, 255);
   position: relative;
   margin: 0px auto;
-  & > svg {
+  > svg {
     position: absolute;
     top: 162px;
     left: 50%;
     transform: translateX(-50%);
   }
-  & > p {
+  > p {
     color: rgb(136, 136, 136);
     font-size: 14px;
     position: absolute;
@@ -176,11 +175,7 @@ const NoLayout = styled.div`
 const InfoWrap = styled.ul`
   width: 100%;
   border-top: 1px solid rgb(228, 228, 228);
-  &::after {
-    display: block;
-    content: "";
-    clear: both;
-  }
+  ${clearFix}
 `;
 
 const TextInfo = styled.li`
@@ -216,11 +211,11 @@ const ChangeBtn = styled.button`
   border-color: rgb(213, 213, 213);
   border-image: initial;
   border-radius: 3px;
-  & > svg {
+  > svg {
     position: relative;
     left: -6px;
   }
-  & > span {
+  > span {
     color: rgb(34, 34, 34);
     font-size: 11px;
     position: absolute;
@@ -234,7 +229,7 @@ const Info = styled.li`
   float: left;
   width: 25%;
   padding-top: 63px;
-  & > div {
+  > div {
     width: 39px;
     height: 37px;
     margin: 0px auto 10px;

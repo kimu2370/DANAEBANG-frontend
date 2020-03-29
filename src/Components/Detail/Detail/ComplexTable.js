@@ -54,7 +54,7 @@ const Table = styled.div`
 const Row = styled.div`
   border-bottom: 1px solid rgba(136, 136, 136, 0.3);
   display: flex;
-  & > li {
+  > li {
     font-weight: 400;
     height: 50px;
   }
@@ -72,11 +72,11 @@ const ThExtend = styled.li`
   font-size: 14px;
   color: rgb(136, 136, 136);
   background-color: rgb(248, 249, 250);
-  & > p {
+  > p {
     float: left;
     line-height: 45px;
   }
-  & > svg {
+  > svg {
     margin-left: 5px;
     position: relative;
     top: 13.5px;

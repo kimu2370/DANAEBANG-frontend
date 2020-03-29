@@ -11,7 +11,7 @@ import bank from "Components/Detail/Images/bank.png";
 import pharmacy from "Components/Detail/Images/pharmacy.png";
 import police from "Components/Detail/Images/police.png";
 import cctv from "Components/Detail/Images/cctv.png";
-// `${NEAR_INFO_URL}?latitude=37.505776&longitude=127.052472`;
+
 const imgs = {
   subway: subway,
   store: store,
@@ -27,85 +27,176 @@ const lat = 37.505776,
 const Location = () => {
   const [click1, setClick1] = useState(true);
   const [click2, setClick2] = useState(false);
+  const [subwayBtn, setSubway] = useState(true);
+  const [storeBtn, setStore] = useState(true);
+  const [martBtn, setMart] = useState(true);
+  const [bankBtn, setBank] = useState(true);
+  const [pharmacyBtn, setPharmacy] = useState(true);
+  const [policeBtn, setPolice] = useState(true);
+  const [cctvBtn, setCctv] = useState(true);
   useEffect(() => {
     axios
       .get(`${NEAR_INFO_URL}?latitude=${lat}&longitude=${lng}`)
       .then(res => mapLoad(res.data.results));
 
     const mapLoad = mapInfo => {
-      console.log(mapInfo.convenience.subway);
+      // console.log(mapInfo);
+      // console.log(mapInfo.convenience.subway);
       kakao.maps.load(() => {
+        let el = document.getElementById("map");
         //파라미터로 autoload=false를 줘서 v3이 모두 로드된 후, 이 콜백함수가 실행된다.
         //"https://www.dabangapp.com/static/media/complex.6334bc71.svg"
-        let el = document.getElementById("map");
-        let imageSrc = imgs.subway,
-          imageSize = new kakao.maps.Size(45, 45);
-        let testSrc =
+
+        let centerSrc =
           "https://www.dabangapp.com/static/media/complex.6334bc71.svg";
-        let testImageSize = new kakao.maps.Size(70, 70);
-        let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-        let testMarkerImage = new kakao.maps.MarkerImage(
-          testSrc,
-          testImageSize
+        let centerImageSize = new kakao.maps.Size(70, 70);
+        let centerMarkerImage = new kakao.maps.MarkerImage(
+          centerSrc,
+          centerImageSize
         );
-        // let markerPosition = new kakao.maps.LatLng(lat, lng);
-        // let test = new kakao.
-        let testArr = [];
-        for (let i = 0; i < mapInfo.convenience.subway.length; i++) {
-          testArr.push(
-            new kakao.maps.LatLng(
-              mapInfo.convenience.subway[i].position[0],
-              mapInfo.convenience.subway[i].position[1]
-            )
-          );
-        }
         let map = new kakao.maps.Map(el, {
           center: new kakao.maps.LatLng(lat, lng),
           level: 3
         });
-        let testMarker = new kakao.maps.Marker({
+        let centerMarker = new kakao.maps.Marker({
           map: map,
           position: new kakao.maps.LatLng(lat, lng),
-          image: testMarkerImage
+          image: centerMarkerImage
         });
-        for (let i = 0; i < mapInfo.convenience.subway.length; i++) {
-          let marker = new kakao.maps.Marker({
-            map: map, //마커를 표시할 지도
-            position: testArr[i], // 마커를 표시할 위치
-            image: markerImage //마커 이미지
-          });
-          testMarker.setMap(map);
-          marker.setMap(map);
-          // createSubwayMarkers(mapInfo, map);
-        }
+        centerMarker.setMap(map);
+        getNearInfo(mapInfo, map);
       });
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    click1,
+    click2,
+    subwayBtn,
+    storeBtn,
+    martBtn,
+    bankBtn,
+    pharmacyBtn,
+    policeBtn,
+    cctvBtn
+  ]);
 
-  // const getMarkerPostions = mapInfo => {
-  //   let subwayPostions = mapInfo["convenience"]["subway"].map(item => {
-  //     return new kakao.maps.LatLng(
-  //       Number(item.position[0]),
-  //       Number(item.position[1])
-  //     );
-  //   });
-  //   console.log(subwayPostions);
-  //   return subwayPostions;
-  // };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // function createSubwayMarkers(mapInfo, map) {
-  //   return getMarkerPostions(mapInfo).map((item, i) => {
-  //     let imageSrc = imgs[subway];
-  //     let imageSize = new kakao.maps.Size(40, 40);
-  //     let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-  //     let marker = new kakao.maps.Marker({
-  //       postion: item[i],
-  //       image: markerImage
-  //     });
-  //     marker.setMap(map);
-  //   });
-  // }
+  const getNearInfo = (mapInfo, map) => {
+    if (click1) {
+      subwayBtn && getSubway(mapInfo, map);
+      storeBtn && getStore(mapInfo, map);
+      bankBtn && getBank(mapInfo, map);
+      martBtn && getMart(mapInfo, map);
+      pharmacyBtn && getPharmacy(mapInfo, map);
+    } else if (click2) {
+      policeBtn && getPolice(mapInfo, map);
+      cctvBtn && getcctv(mapInfo, map);
+    }
+  };
+  const getSubway = (mapInfo, map) => {
+    let imagesSrc = imgs.subway,
+      imagesSize = new kakao.maps.Size(35, 35);
+    let markerImage = new kakao.maps.MarkerImage(imagesSrc, imagesSize);
+    let nearArr = [];
+    mapInfo.convenience.subway.map((item, i) => {
+      nearArr.push(new kakao.maps.LatLng(item.position[0], item.position[1]));
+      let marker = new kakao.maps.Marker({
+        map: map, //마커를 표시할 지도
+        position: nearArr[i], // 마커를 표시할 위치
+        image: markerImage //마커 이미지
+      });
+      marker.setMap(map);
+    });
+  };
+  const getStore = (mapInfo, map) => {
+    let imagesSrc = imgs.store,
+      imagesSize = new kakao.maps.Size(35, 35);
+    let markerImage = new kakao.maps.MarkerImage(imagesSrc, imagesSize);
+    let nearArr = [];
+    mapInfo.convenience.convenient_store.map((item, i) => {
+      nearArr.push(new kakao.maps.LatLng(item.position[0], item.position[1]));
+      let marker = new kakao.maps.Marker({
+        map: map, //마커를 표시할 지도
+        position: nearArr[i], // 마커를 표시할 위치
+        image: markerImage //마커 이미지
+      });
+      marker.setMap(map);
+    });
+  };
+  const getBank = (mapInfo, map) => {
+    let imagesSrc = imgs.bank,
+      imagesSize = new kakao.maps.Size(35, 35);
+    let markerImage = new kakao.maps.MarkerImage(imagesSrc, imagesSize);
+    let nearArr = [];
+    mapInfo.convenience.bank.map((item, i) => {
+      nearArr.push(new kakao.maps.LatLng(item.position[0], item.position[1]));
+      let marker = new kakao.maps.Marker({
+        map: map, //마커를 표시할 지도
+        position: nearArr[i], // 마커를 표시할 위치
+        image: markerImage //마커 이미지
+      });
+      marker.setMap(map);
+    });
+  };
+  const getMart = (mapInfo, map) => {
+    let imagesSrc = imgs.mart,
+      imagesSize = new kakao.maps.Size(35, 35);
+    let markerImage = new kakao.maps.MarkerImage(imagesSrc, imagesSize);
+    let nearArr = [];
+    mapInfo.convenience.mart.map((item, i) => {
+      nearArr.push(new kakao.maps.LatLng(item.position[0], item.position[1]));
+      let marker = new kakao.maps.Marker({
+        map: map, //마커를 표시할 지도
+        position: nearArr[i], // 마커를 표시할 위치
+        image: markerImage //마커 이미지
+      });
+      marker.setMap(map);
+    });
+  };
+  const getPharmacy = (mapInfo, map) => {
+    let imagesSrc = imgs.pharmacy,
+      imagesSize = new kakao.maps.Size(35, 35);
+    let markerImage = new kakao.maps.MarkerImage(imagesSrc, imagesSize);
+    let nearArr = [];
+    mapInfo.convenience.pharmacy.map((item, i) => {
+      nearArr.push(new kakao.maps.LatLng(item.position[0], item.position[1]));
+      let marker = new kakao.maps.Marker({
+        map: map, //마커를 표시할 지도
+        position: nearArr[i], // 마커를 표시할 위치
+        image: markerImage //마커 이미지
+      });
+      marker.setMap(map);
+    });
+  };
+  const getPolice = (mapInfo, map) => {
+    let imagesSrc = imgs.police,
+      imagesSize = new kakao.maps.Size(35, 35);
+    let markerImage = new kakao.maps.MarkerImage(imagesSrc, imagesSize);
+    let nearArr = [];
+    mapInfo.safety.police.map((item, i) => {
+      nearArr.push(new kakao.maps.LatLng(item.position[0], item.position[1]));
+      let marker = new kakao.maps.Marker({
+        map: map, //마커를 표시할 지도
+        position: nearArr[i], // 마커를 표시할 위치
+        image: markerImage //마커 이미지
+      });
+      marker.setMap(map);
+    });
+  };
+  const getcctv = (mapInfo, map) => {
+    let imagesSrc = imgs.cctv,
+      imagesSize = new kakao.maps.Size(35, 35);
+    let markerImage = new kakao.maps.MarkerImage(imagesSrc, imagesSize);
+    let nearArr = [];
+    mapInfo.safety.cctv.map((item, i) => {
+      nearArr.push(new kakao.maps.LatLng(item.position[0], item.position[1]));
+      let marker = new kakao.maps.Marker({
+        map: map, //마커를 표시할 지도
+        position: nearArr[i], // 마커를 표시할 위치
+        image: markerImage //마커 이미지
+      });
+      marker.setMap(map);
+    });
+  };
 
   return (
     <Block>
@@ -139,23 +230,23 @@ const Location = () => {
           <CenterWrap>
             {click1 && (
               <>
-                <Btn>
+                <Btn onClick={() => setSubway(!subwayBtn)}>
                   <Icon iName="subway" />
                   <p>지하철역</p>
                 </Btn>
-                <Btn>
+                <Btn onClick={() => setStore(!storeBtn)}>
                   <Icon iName="mart" />
                   <p>마트</p>
                 </Btn>
-                <Btn>
+                <Btn onClick={() => setMart(!martBtn)}>
                   <Icon iName="store" />
                   <p>편의점</p>
                 </Btn>
-                <Btn>
+                <Btn onClick={() => setBank(!bankBtn)}>
                   <Icon iName="bank" />
                   <p>은행</p>
                 </Btn>
-                <Btn>
+                <Btn onClick={() => setPharmacy(!pharmacyBtn)}>
                   <Icon iName="pharmacy" />
                   <p>약국</p>
                 </Btn>
@@ -163,11 +254,11 @@ const Location = () => {
             )}
             {click2 && (
               <>
-                <Btn>
+                <Btn onClick={() => setPolice(!policeBtn)}>
                   <Icon iName="police" />
                   <p>치안</p>
                 </Btn>
-                <Btn>
+                <Btn onClick={() => setCctv(!cctvBtn)}>
                   <Icon iName="cctv" />
                   <p>cctv</p>
                 </Btn>
@@ -210,7 +301,7 @@ const Address = styled.p`
   line-height: 23px;
   text-align: center;
   margin: 3px auto 27px;
-  &::after {
+  ::after {
     display: block;
     content: "";
     clear: both;
@@ -221,7 +312,7 @@ const NearMap = styled.div`
   height: 400px;
   position: relative;
   margin: 29px auto 0px;
-  & > div {
+  > div {
     width: 850px;
     height: 400px;
   }
@@ -273,7 +364,7 @@ const Btn = styled.div`
   float: left;
   width: 94px;
   height: 70px;
-  & > p {
+  > p {
     margin-top: 6px;
     color: rgb(68, 68, 68);
     font-size: 14px;

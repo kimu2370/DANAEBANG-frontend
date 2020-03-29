@@ -82,8 +82,8 @@ export default function ImageCard() {
   return (
     <div>
       <Slider {...settings}>
-        {CardImage.map(item => (
-          <CardWrapper>
+        {CardImage.map((item, i) => (
+          <CardWrapper key={i}>
             <CardView>
               <CardListWrapper>
                 <CardItem>

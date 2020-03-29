@@ -50,7 +50,6 @@ const Spaces = props => {
               id={i}
               active={checkId(i)}
               onClick={() => {
-                // 클릭하면 selectPyeongAction 발생
                 setSelectId(i);
               }}
             >
@@ -91,7 +90,7 @@ const Header = styled.div`
   width: 100%;
   height: 54px;
   position: relative;
-  & > h1 {
+  > h1 {
     color: rgb(34, 34, 34);
     font-size: 18px;
     font-weight: 400;
@@ -106,12 +105,12 @@ const BtnWrap = styled.div`
   top: 50%;
   right: 0px;
   transform: translateY(-50%);
-  &:nth-child(1) {
+  :nth-child(1) {
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
     border-right: 0px;
   }
-  &:nth-child(2) {
+  :nth-child(2) {
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
     border-left: 0px;
@@ -145,7 +144,7 @@ const Item = styled.li`
   cursor: pointer;
   height: 48px;
   border-top: 1px solid rgb(229, 229, 229);
-  & > p {
+  > p {
     display: block;
     width: 100%;
     color: ${props =>

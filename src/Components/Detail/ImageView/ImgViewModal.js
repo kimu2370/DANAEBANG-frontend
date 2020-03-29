@@ -4,12 +4,11 @@ import { AiOutlineClose } from "react-icons/ai";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { imgCloseModalAction } from "Redux/Actions/imgCloseModalAction";
 import { connect } from "react-redux";
-
+import { clearFix } from "Styles/clearFix";
 const ImgViewModal = props => {
-  // console.log(props);
-  const { info } = props;
+  const { imgUrl } = props;
   return (
-    <Modal show={props.showModal.showModal}>
+    <Modal show={props.showModal}>
       <Overlay>
         <CloseBtn onClick={() => props.imgCloseModalAction()}>
           <AiOutlineClose size={50} color={"white"} />
@@ -20,8 +19,8 @@ const ImgViewModal = props => {
               <FiChevronLeft size={18} color={"white"} />
             </SmallLeftBtn>
             <ImgList>
-              {info &&
-                info.map((item, i) => (
+              {imgUrl &&
+                imgUrl.map((item, i) => (
                   <Item key={i}>
                     <ThumbnailImg src={item} />
                   </Item>
@@ -35,7 +34,7 @@ const ImgViewModal = props => {
             <LargeLeftBtn>
               <FiChevronLeft size={40} color={"white"} />
             </LargeLeftBtn>
-            <Photo src={info && info[0]} />
+            <Photo src={imgUrl && imgUrl[0]} />
             <LargeRightBtn>
               <FiChevronRight size={40} color={"white"} />
             </LargeRightBtn>
@@ -118,11 +117,7 @@ const ImgList = styled.ul`
   height: 93px;
   position: relative;
   transition: transform 200ms ease 0s;
-  &::after {
-    display: block;
-    content: "";
-    clear: both;
-  }
+  ${clearFix}
 `;
 
 const Item = styled.li`
@@ -134,7 +129,7 @@ const ThumbnailImg = styled.div`
   width: 100%;
   height: 100%;
   background: url(${props => props.src}) center center / cover no-repeat;
-  &::after {
+  ::after {
     content: "";
     display: block;
     width: 100%;

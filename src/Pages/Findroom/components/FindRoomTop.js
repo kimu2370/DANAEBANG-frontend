@@ -67,10 +67,10 @@ const FindroomTop = styled.div`
   min-width: 1366px;
   height: 66px;
   border-bottom: 1px solid #eee;
-  background-color:#fff;
-  position:fixed;
-  top:66px;
-  z-index:10;
+  background-color: #fff;
+  position: fixed;
+  top: 66px;
+  z-index: 10;
 `;
 
 const TopWrap = styled.ul`

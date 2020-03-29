@@ -30,8 +30,8 @@ const ComplexDetail = props => {
         <>
           <ComplexHeader info={info} />
           <ComplexTable info={info} />
-          <ImageView info={info.image_urls} />
-          <ImgViewModal info={info.image_urls} />
+          <ImageView imgUrl={info.image_urls} />
+          <ImgViewModal imgUrl={info.image_urls} />
           <Nav />
           <div>
             <ComplexPrice

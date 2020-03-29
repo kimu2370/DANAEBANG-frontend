@@ -66,7 +66,7 @@ const Content = styled.div`
   height: 90px;
   position: relative;
   margin: 0px auto;
-  &::after {
+  ::after {
     display: block;
     content: "";
     clear: both;
@@ -77,13 +77,13 @@ const ComplexName = styled.div`
   height: 90px;
   margin-right: 20px;
   padding: 20px 0px;
-  & > p {
+  > p {
     color: rgb(255, 255, 255);
     opacity: 0.7;
     font-size: 14px;
     line-height: 20px;
   }
-  & > h1 {
+  > h1 {
     color: rgb(255, 255, 255);
     font-size: 22px;
     line-height: 31px;
@@ -99,7 +99,7 @@ const FavoritBtn = styled.div`
   position: relative;
   top: 45px;
   cursor: pointer;
-  & span {
+  span {
     position: relative;
     top: -6px;
     left: 6px;
@@ -125,7 +125,7 @@ const Tabs = styled.div`
   position: relative;
   z-index: 2;
   margin: 0px auto;
-  & > a {
+  > a {
     width: calc(20%);
   }
 `;

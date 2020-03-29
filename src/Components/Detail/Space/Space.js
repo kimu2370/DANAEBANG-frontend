@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Spaces from "./Spaces";
 import InfoLeft from "./InfoLeft";
 import InfoRight from "./InfoRight";
-
+import { clearFix } from "Styles/clearFix";
 const Space = props => {
   const { info } = props;
   return (
@@ -48,9 +48,5 @@ const Wrap = styled.div`
 const InfoWrap = styled.div`
   width: 100%;
   padding-left: 252px;
-  &::after {
-    display: block;
-    content: "";
-    clear: both;
-  }
+  ${clearFix}
 `;
