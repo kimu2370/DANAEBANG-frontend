@@ -11,18 +11,19 @@ import { ReactComponent as Ireport } from "Components/Detail/Images/report.svg";
 const RoomHeader = props => {
   const [like, setLike] = useState(false);
   const [change, setChange] = useState(false);
-  // console.log(props);
+  const { info } = props;
   return (
     <Box>
       <Summary>
         <Li>
           <Title>
-            <span>오피스텔</span>
-            <span> · </span>
-            <span>트윈타워</span>
+            <span>
+              {info.room_type}
+              {info.room_sub_type && `(${info.room_sub_type})`}
+            </span>
           </Title>
           <InfoWrap>
-            <Info>월세 1000/55</Info>
+            <Info>{`${info.trade_infos[0].trade_info_name} ${info.trade_infos[0].deposit}/${info.trade_infos[0].fee}`}</Info>
             <ManWon>만원</ManWon>
           </InfoWrap>
         </Li>
@@ -31,23 +32,27 @@ const RoomHeader = props => {
             <span>전용면적</span>
           </Title>
           <InfoWrap>
-            <Info>{change ? "28.14㎡" : "9평"}</Info>
+            <Info>
+              {!change
+                ? `${info.room_size}㎡`
+                : `${Math.round(info.room_size * 0.3025)}평`}
+            </Info>
             <ChangeBtn onClick={() => setChange(!change)}>
               <Ichange />
-              <Span>{change ? "평" : "㎡"}</Span>
+              <Span>{change ? "㎡" : "평"}</Span>
             </ChangeBtn>
           </InfoWrap>
         </Li>
         <Li marginLeft>
           <Title>한달생활비</Title>
           <InfoWrap>
-            <Info buleColor>10만 원 + α</Info>
+            <Info buleColor>{info.maintenance_price}만 원 + α</Info>
           </InfoWrap>
         </Li>
         <AgentLi>
           <AgentLeft>
-            <AgentTilte>DANAEBANG중개소</AgentTilte>
-            <AgentName>승현</AgentName>
+            <AgentTilte>{info.agent.name}</AgentTilte>
+            <AgentName>{info.agent.face_name}</AgentName>
           </AgentLeft>
           <ContactBtn
             onClick={() => {
@@ -87,7 +92,6 @@ const RoomHeader = props => {
 };
 
 const mapStateToProps = state => {
-  // console.log(state);
   return { showModal: state.contactShowModal };
 };
 export default connect(mapStateToProps, { contactOpenModalAction })(RoomHeader);
@@ -112,6 +116,7 @@ const Li = styled.li`
   padding-right: 25px;
   flex: 0 0 auto;
   border-right: 1px solid rgb(235, 235, 235);
+  margin-top: 100px;
 `;
 const AgentLi = styled.li`
   display: flex;
@@ -119,6 +124,7 @@ const AgentLi = styled.li`
   -webkit-box-pack: end;
   justify-content: flex-end;
   flex: 1 1 0%;
+  margin-top: 100px;
 `;
 const Title = styled.p`
   margin-bottom: 6px;
@@ -162,7 +168,7 @@ const ChangeBtn = styled.button`
   border-color: rgb(213, 213, 213);
   border-image: initial;
   border-radius: 3px;
-  &:hover {
+  :hover {
     cursor: pointer;
   }
 `;
@@ -199,18 +205,18 @@ const ContactBtn = styled.button`
   border-color: rgb(221, 221, 221);
   border-image: initial;
   border-radius: 19px;
-  &:hover {
+  :hover {
     border-width: 1px;
     border-style: solid;
     border-color: rgb(34, 34, 34);
     border-image: initial;
   }
-  & > svg {
+  > svg {
     position: absolute;
     left: 18px;
     top: 10px;
   }
-  & > span {
+  > span {
     position: absolute;
     left: 38px;
     top: 8px;
@@ -224,7 +230,7 @@ const BtnWrap = styled.div`
   width: 100%;
   height: 22px;
   margin-bottom: 17px;
-  & > svg:hover {
+  > svg:hover {
     cursor: pointer;
   }
 `;
@@ -240,7 +246,7 @@ const Favorite = styled.p`
   user-select: none;
   margin-right: 4px;
   cursor: pointer;
-  & > svg > path {
+  > svg > path {
     ${props =>
       props.isClick &&
       `fill: #f63c4a;
@@ -269,18 +275,18 @@ const ReportBtn = styled.button`
   border-style: solid;
   border-color: rgb(255, 255, 255);
   border-image: initial;
-  &:hover {
+  :hover {
     cursor: pointer;
   }
-  & > svg {
+  > svg {
     fill: rgb(34, 34, 34);
     position: relative;
     bottom: 1px;
   }
-  &:hover > svg {
+  :hover > svg {
     fill: rgb(246, 60, 74);
   }
-  & > span {
+  > span {
     margin-left: 6px;
     position: relative;
     top: 1px;

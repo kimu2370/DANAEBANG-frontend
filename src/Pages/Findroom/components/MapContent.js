@@ -144,11 +144,11 @@ class MapContent extends Component {
         kakao.maps.event.addListener(clusterer, "clusterclick", cluster => {
           const markerInfo = cluster.getMarkers();
           let markerArray = [];
-          for (var idx = 0; idx < markerInfo.length; idx++) {
+          for (var idx = 0; idx < markerInfo && markerInfo.length; idx++) {
             markerArray.push(markerInfo[idx].getPosition());
           }
           // const leng = markerArray.length;
-          console.log("array", markerArray);
+          // console.log("array", markerArray);
           this.setState({
             clusterData: markerArray
           });

@@ -17,7 +17,8 @@ class Routes extends Component {
           <Route exact path="/" component={Main} />
           <Route exact path="/layout" component={Layout} />
           <Route exact path="/search" component={FindRoom} />
-          <Route exact path="/detail/:id" component={ComplexDetail} />
+          <Route exact path="/room/detail/:id" component={RoomDetail} />
+          <Route exact path="/complex/detail/:id" component={ComplexDetail} />
         </Switch>
       </Router>
     );

@@ -2,15 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { imgOpenModalAction } from "Redux/Actions/imgOpenModalAction";
 import { connect } from "react-redux";
+import { clearFix } from "Styles/clearFix";
 const ImageView = props => {
-  const { info } = props;
+  const { imgUrl } = props;
   const noImg = "https://www.dabangapp.com/static/media/no_image.91d4ad2d.svg";
   return (
     <Box onClick={() => props.imgOpenModalAction()}>
       <ImgView>
-        <BigView src={info && info[0]} />
-        {info && info.length > 1 ? (
-          info.map(
+        <BigView src={imgUrl && imgUrl[0]} />
+        {imgUrl && imgUrl.length > 1 ? (
+          imgUrl.map(
             (item, i) =>
               i > 0 && i < 5 && <SmallView key={i} src={item} noImg={noImg} />
           )
@@ -22,7 +23,7 @@ const ImageView = props => {
             <SmallView noImg={noImg} />
           </>
         )}
-        {info && info.length > 5 && (
+        {imgUrl && imgUrl.length > 5 && (
           <More>
             <p>전체보기</p>
           </More>
@@ -32,13 +33,7 @@ const ImageView = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    showModal: state.imgShowModal
-  };
-};
-
-export default connect(mapStateToProps, { imgOpenModalAction })(ImageView);
+export default connect(null, { imgOpenModalAction })(ImageView);
 
 const Box = styled.div`
   width: 1180px;
@@ -52,11 +47,7 @@ const ImgView = styled.div`
   position: relative;
   cursor: pointer;
   /* 클리어 속성으로 밑에 내용 따라붙지 않게 하기 */
-  &::after {
-    display: block;
-    content: "";
-    clear: both;
-  }
+  ${clearFix}
 `;
 const BigView = styled.div`
   float: left;
@@ -68,7 +59,7 @@ const BigView = styled.div`
   border-style: initial;
   border-color: initial;
   border-image: initial;
-  &::before {
+  ::before {
     width: 86px;
     height: 86px;
     top: 50%;
@@ -77,14 +68,14 @@ const BigView = styled.div`
     background: url(${props => props.src || props.noImg}) center center
       no-repeat;
   }
-  &::after {
+  ::after {
     width: 100%;
     height: 100%;
     top: 0px;
     left: 0px;
     background: url(${props => props.src}) center center / cover no-repeat;
   }
-  &::before,
+  ::before,
   ::after {
     content: "";
     display: block;
@@ -97,7 +88,7 @@ const SmallView = styled.div`
   height: 210px;
   background-color: rgb(246, 247, 248);
   position: relative;
-  &::before {
+  ::before {
     width: 86px;
     height: 86px;
     top: 50%;
@@ -106,7 +97,7 @@ const SmallView = styled.div`
     background: url(${props => props.src || props.noImg}) center center
       no-repeat;
   }
-  &::after {
+  ::after {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -118,7 +109,7 @@ const SmallView = styled.div`
     border-image: initial;
     background: url(${props => props.src}) center center / cover no-repeat;
   }
-  &::before,
+  ::before,
   ::after {
     content: "";
     display: block;
@@ -132,13 +123,13 @@ const More = styled.div`
   position: absolute;
   right: 0px;
   bottom: 0px;
-  &::before {
+  ::before {
     width: 39px;
     height: 1px;
     background-color: rgb(255, 255, 255);
     top: 91px;
   }
-  & > p {
+  > p {
     width: 100%;
     color: rgb(255, 255, 255);
     font-size: 16px;
@@ -148,13 +139,13 @@ const More = styled.div`
     top: 122px;
     left: 0px;
   }
-  &::after {
+  ::after {
     width: 1px;
     height: 39px;
     background-color: rgb(255, 255, 255);
     top: 72px;
   }
-  &::before,
+  ::before,
   ::after {
     content: "";
     display: block;

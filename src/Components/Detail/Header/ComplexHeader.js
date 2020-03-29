@@ -6,7 +6,7 @@ import { ReactComponent as Icopy } from "Components/Detail/Images/copy.svg";
 const ComplexHeader = props => {
   const [like, setLike] = useState(false);
   const { info } = props;
-  // console.log(info);
+
   return (
     <Block>
       <Box>
@@ -85,7 +85,7 @@ const Box = styled.div`
 const Wrap = styled.div`
   margin-top: 100px;
   margin-bottom: 17px;
-  & h1 {
+  h1 {
     margin-top: 2px;
     margin-bottom: 35px;
     color: rgb(34, 34, 34);
@@ -103,7 +103,7 @@ const BtnWrap = styled.div`
   display: flex;
   width: 100%;
   height: 22px;
-  & svg {
+  svg {
   }
 `;
 const FavoriteBtn = styled.p`
@@ -111,12 +111,12 @@ const FavoriteBtn = styled.p`
   height: 22px;
   font-size: 15px;
   line-height: 22px;
-  & > span {
+  > span {
     position: relative;
     left: 4px;
     bottom: 5px;
   }
-  & > svg > path {
+  > svg > path {
     ${props =>
       props.isClick &&
       `fill: #f63c4a;
@@ -128,7 +128,7 @@ const Dot = styled.p`
   margin-left: 15px;
   margin-right: 18px;
   left: 5px;
-  & ~ svg {
+  ~ svg {
     position: relative;
     left: 2px;
     bottom: 3px;

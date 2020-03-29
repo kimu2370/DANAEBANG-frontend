@@ -5,7 +5,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import styled from "styled-components";
 import { TRADE_HISTORY_URL } from "Config";
-
+import { clearFix } from "Styles/clearFix";
 const InfoRight = props => {
   const [tradeInfo, setTradeInfo] = useState({});
   const [isSell, setSell] = useState(true);
@@ -385,11 +385,7 @@ const Box = styled.div`
   border-color: rgb(229, 229, 229);
   border-image: initial;
   border-radius: 4px 0px 0px 4px;
-  &::after {
-    display: block;
-    content: "";
-    clear: both;
-  }
+  ${clearFix}
 `;
 
 const Header = styled.div`
@@ -468,11 +464,7 @@ const ChartTooltip = styled.div`
   padding: 27px 6px;
   border-top: 1px solid rgb(187, 187, 187);
   border-bottom: 1px solid rgb(228, 228, 228);
-  &::after {
-    display: block;
-    content: "";
-    clear: both;
-  }
+  ${clearFix}
 `;
 const ChartDate = styled.p`
   height: 20px;
@@ -483,20 +475,16 @@ const ChartDate = styled.p`
 `;
 const PriceWrap = styled.ul`
   width: 100%;
-  & > li {
+  > li {
     width: 50%;
     height: 52px;
     float: left;
     text-align: center;
   }
-  & > li + li {
+  > li + li {
     border-left: 1px solid rgb(216, 216, 216);
   }
-  &::after {
-    display: block;
-    content: "";
-    clear: both;
-  }
+  ${clearFix}
 `;
 const PriceText = styled.p`
   height: 20px;
@@ -521,29 +509,25 @@ const History = styled.div`
 const HistoryTitle = styled.div`
   margin-top: 22px;
   margin-bottom: 11px;
-  &::after {
-    display: block;
-    content: "";
-    clear: both;
-  }
-  & > p {
+  ${clearFix}
+  > p {
     float: left;
     height: 22px;
     font-size: 15px;
     font-weight: 700;
     color: rgb(0, 0, 0);
   }
-  & > div {
+  > div {
     float: right;
     height: 19px;
   }
-  & > div > span {
+  > div > span {
     text-align: right;
     height: 19px;
     font-size: 13px;
     color: rgb(170, 170, 170);
   }
-  & > div > span + span {
+  > div > span + span {
     margin-left: 5px;
   }
 `;
@@ -552,7 +536,7 @@ const Table = styled.table`
   width: 100%;
   border-top: 1px solid rgb(228, 228, 228);
   border-bottom: 1px solid rgb(228, 228, 228);
-  & > thead > tr > th {
+  > thead > tr > th {
     background-color: rgb(246, 246, 246);
     height: 20px;
     font-size: 14px;
@@ -561,14 +545,14 @@ const Table = styled.table`
     text-align: center;
     padding: 10px 0px 12px;
   }
-  & tbody > tr > td {
+  tbody > tr > td {
     height: 20px;
     font-size: 14px;
     color: rgb(136, 136, 136);
     text-align: center;
     padding: 11px 0px;
   }
-  & tbody > tr > td.Price {
+  tbody > tr > td.Price {
     color: rgb(34, 34, 34);
   }
 `;
@@ -597,7 +581,7 @@ const NoChart = styled.div`
   margin-top: 6px;
   background-color: rgb(255, 255, 255);
   position: relative;
-  & > p {
+  > p {
     color: rgb(187, 187, 187);
     font-size: 14px;
     white-space: nowrap;

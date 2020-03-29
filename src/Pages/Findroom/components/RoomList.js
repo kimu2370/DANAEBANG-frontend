@@ -15,8 +15,8 @@ class Roomlist extends Component {
         roomid: num
       },
       () => {
-        console.log(this.state.roomid);
-        this.props.history.push("/detail/" + this.state.roomid);
+        // console.log(this.state.roomid);
+        this.props.history.push("/room/detail/" + this.state.roomid);
       }
     );
   };
