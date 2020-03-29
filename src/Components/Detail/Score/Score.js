@@ -8,7 +8,6 @@ HighchartsMore(Highcharts);
 
 const Score = props => {
   const { score } = props;
-  // console.log(score);
   const options = {
     chart: {
       polar: true,
@@ -20,7 +19,7 @@ const Score = props => {
     },
 
     pane: {
-      size: "100%"
+      size: "90%"
     },
 
     xAxis: {
@@ -70,47 +69,45 @@ const Score = props => {
     ]
   };
   return (
-    <div>
-      <Box>
-        <Title>다방면 스코어</Title>
-        <ChartWrap>
-          <h1>
-            {Math.round(
-              options.series[0].data.reduce((acc, cur) => acc + cur) / 5
-            )}
-            <span>점</span>
-          </h1>
+    <Box>
+      <Title>다방면 스코어</Title>
+      <ChartWrap>
+        <h1>
+          {Math.round(
+            options.series[0].data.reduce((acc, cur) => acc + cur) / 5
+          )}
+          <span>점</span>
+        </h1>
 
-          <Labels>
-            <p>
-              <svg width="19" height="23" viewBox="0 0 16 19">
-                <path
-                  fill="#5E90F3"
-                  fillRule="evenodd"
-                  d="M7.995.5L.5 4.827v8.655l7.495 4.327 7.495-4.327V4.827z"
-                ></path>
-              </svg>
-              <span>이 방</span>
-            </p>
-            <p>
-              <svg width="19px" height="23px" viewBox="0 0 16 19">
-                <path
-                  fill="none"
-                  fillRule="evenodd"
-                  stroke="#000"
-                  strokeDasharray="1,2,1,2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M7.995.5L.5 4.827v8.655l7.495 4.327 7.495-4.327V4.827z"
-                ></path>
-              </svg>
-              <span>이 지역 평균</span>
-            </p>
-          </Labels>
-          <HighchartsReact highcharts={Highcharts} options={options} />
-        </ChartWrap>
-      </Box>
-    </div>
+        <Labels>
+          <p>
+            <svg width="19" height="23" viewBox="0 0 16 19">
+              <path
+                fill="#5E90F3"
+                fillRule="evenodd"
+                d="M7.995.5L.5 4.827v8.655l7.495 4.327 7.495-4.327V4.827z"
+              ></path>
+            </svg>
+            <span>이 방</span>
+          </p>
+          <p>
+            <svg width="19px" height="23px" viewBox="0 0 16 19">
+              <path
+                fill="none"
+                fillRule="evenodd"
+                stroke="#000"
+                strokeDasharray="1,2,1,2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M7.995.5L.5 4.827v8.655l7.495 4.327 7.495-4.327V4.827z"
+              ></path>
+            </svg>
+            <span>이 지역 평균</span>
+          </p>
+        </Labels>
+        <HighchartsReact highcharts={Highcharts} options={options} />
+      </ChartWrap>
+    </Box>
   );
 };
 
