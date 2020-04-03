@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { clearFix } from "Styles/clearFix";
 const RoomPrice = props => {
   const { info } = props;
+  console.log(
+    info.trade_infos.filter(item => item.trade_info_name === "전세")[0]
+  );
   return (
     <Box>
       <Title>가격정보</Title>
@@ -27,17 +30,26 @@ const RoomPrice = props => {
           <tr>
             <td>
               <p>
-                {info.trade_infos[0].deposit}/{info.trade_infos[0].fee}만 원
+                {info.trade_infos.filter(
+                  item => item.trade_info_name === "월세"
+                )[0] &&
+                  info.trade_infos.filter(
+                    item => item.trade_info_name === "월세"
+                  )[0].deposit +
+                    "/" +
+                    info.trade_infos.filter(
+                      item => item.trade_info_name === "월세"
+                    )[0].fee}
               </p>
             </td>
             <td>
               <p>
-                {info.trade_infos[1]
-                  ? info.trade_infos[1].deposit.toString().slice(0, 1) +
-                    "억" +
-                    info.trade_infos[1].deposit.toString().slice(1) +
-                    "만원"
-                  : "-"}
+                {info.trade_infos.filter(
+                  item => item.trade_info_name === "전세"
+                )[0] &&
+                  info.trade_infos.filter(
+                    item => item.trade_info_name === "전세"
+                  )[0].deposit}
               </p>
             </td>
             <td>

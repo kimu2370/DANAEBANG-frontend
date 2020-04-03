@@ -105,7 +105,7 @@ const Score = props => {
             <span>이 지역 평균</span>
           </p>
         </Labels>
-        <HighchartsReact highcharts={Highcharts} options={options} />
+        {score && <HighchartsReact highcharts={Highcharts} options={options} />}
       </ChartWrap>
     </Box>
   );

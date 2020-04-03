@@ -12,6 +12,7 @@ const RoomHeader = props => {
   const [like, setLike] = useState(false);
   const [change, setChange] = useState(false);
   const { info } = props;
+  console.log(info.trade_infos);
   return (
     <Box>
       <Summary>
@@ -23,7 +24,11 @@ const RoomHeader = props => {
             </span>
           </Title>
           <InfoWrap>
-            <Info>{`${info.trade_infos[0].trade_info_name} ${info.trade_infos[0].deposit}/${info.trade_infos[0].fee}`}</Info>
+            <Info>{`${info.trade_infos[0].trade_info_name} ${
+              info.trade_infos[0].deposit
+            }${
+              info.trade_infos[0].fee !== 0 ? "/" + info.trade_infos[0].fee : ""
+            }`}</Info>
             <ManWon>만원</ManWon>
           </InfoWrap>
         </Li>

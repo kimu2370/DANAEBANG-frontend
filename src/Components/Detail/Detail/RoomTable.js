@@ -19,10 +19,16 @@ const RoomTable = props => {
             <Name>전용/공급면적</Name>
             <Value>
               {!change
-                ? `${info.room_size}/${info.provision_size}㎡`
-                : `${Math.round(info.room_size * 0.3025)}/${Math.round(
-                    info.provision_size * 0.3025
-                  )}평`}
+                ? `${info.room_size}/${
+                    info.provision_size
+                      ? info.provision_size
+                      : info.contract_size
+                  }㎡`
+                : `${Math.round(info.room_size * 0.3025)}/${
+                    info.provision_size
+                      ? Math.round(info.provision_size * 0.3025)
+                      : Math.round(info.contract_size * 0.3025)
+                  }평`}
             </Value>
             <ChangeBtn onClick={() => setChange(!change)}>
               <Ichange />

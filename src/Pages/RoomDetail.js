@@ -14,6 +14,7 @@ import Memo from "Components/Detail/Memo";
 import RoomPrice from "Components/Detail/Price/RoomPrice";
 import Location from "Components/Detail/Location";
 import Score from "Components/Detail/Score/Score";
+
 const RoomDetail = props => {
   const [info, setInfo] = useState({});
   useEffect(() => {
@@ -25,6 +26,7 @@ const RoomDetail = props => {
   const handleUrl = () => {
     history.push(`/complex/detail/${info.complex.complex_id}`);
   };
+  console.log(info);
   return (
     <Layout>
       {info.room_type && (

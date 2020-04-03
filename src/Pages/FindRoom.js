@@ -38,7 +38,7 @@ class FindRoom extends Component {
 
   roomDataFetch = () => {
     fetch(
-      `${FIND_ROOM_URL}?latitude=${this.state.lat}&longitude=${this.state.lng}&zoom=1&offset=1&limit=24&multi_room_type=1&multi_room_type=2&multi_room_type=3&multi_room_type=4&multi_room_type=5&selling_type=1&selling_type=2&selling_type=3&room_size=0&room_size=50&maintenance_price=0&maintenance_price=10&deposit_range=0&deposit_range=20000&fee_range=0&fee_range=200`,
+      `${FIND_ROOM_URL}?latitude=${this.state.lat}&longitude=${this.state.lng}&zoom=1&offset=1&limit=24&multi_room_type=4&multi_room_type=5&selling_type=1&selling_type=2&selling_type=3&room_size=0&room_size=50&maintenance_price=0&maintenance_price=10&deposit_range=0&deposit_range=20000&fee_range=0&fee_range=200`,
       { method: "GET" }
     )
       .then(res => res.json())
