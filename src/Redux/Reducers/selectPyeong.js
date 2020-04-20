@@ -1,7 +1,7 @@
 import { SELECT_PYEONG } from "Redux/types";
 const initState = {
   householdNum: 0,
-  pyeongInfo: []
+  pyeongInfo: [],
 };
 
 export default function selectPyeong(state = initState, action) {
@@ -10,7 +10,7 @@ export default function selectPyeong(state = initState, action) {
       return {
         ...state,
         householdNum: action.payload.householdNum,
-        pyeongInfo: action.payload.pyeongInfo
+        pyeongInfo: action.payload.pyeongInfo,
       };
     default:
       return state;

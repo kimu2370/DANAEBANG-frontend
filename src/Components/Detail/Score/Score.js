@@ -6,20 +6,21 @@ import styled from "styled-components";
 import { clearFix } from "Styles/clearFix";
 HighchartsMore(Highcharts);
 
-const Score = props => {
+const Score = (props) => {
   const { score } = props;
+
   const options = {
     chart: {
       polar: true,
-      animation: false
+      animation: false,
     },
 
     title: {
-      text: "가격대비 괜찮은 방!"
+      text: "가격대비 괜찮은 방!",
     },
 
     pane: {
-      size: "90%"
+      size: "90%",
     },
 
     xAxis: {
@@ -28,11 +29,11 @@ const Score = props => {
       //   },
       categories: ["가격", "관리비", "옵션", "편의시설", "교통"],
       //   tickmarkPlacement: "between",
-      lineWidth: 0
+      lineWidth: 0,
     },
 
     yAxis: {
-      gridLineInterpolation: "polygon"
+      gridLineInterpolation: "polygon",
       //   lineWidth: 0,
       //   min: 0,
       //   max: 5,
@@ -40,20 +41,20 @@ const Score = props => {
     },
 
     tooltip: {
-      enabled: false
+      enabled: false,
     },
 
     legend: {
-      enabled: false
+      enabled: false,
     },
 
     plotOptions: {
       series: {
-        animation: false
-      }
+        animation: false,
+      },
     },
     credits: {
-      enabled: false
+      enabled: false,
     },
     series: [
       {
@@ -63,10 +64,10 @@ const Score = props => {
           Number(score.maintenance),
           Number(score.option),
           Number(score.near),
-          Number(score.traffic)
-        ]
-      }
-    ]
+          Number(score.traffic),
+        ],
+      },
+    ],
   };
   return (
     <Box>

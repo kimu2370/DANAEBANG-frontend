@@ -19,7 +19,7 @@ const imgs = {
   bank: bank,
   pharmacy: pharmacy,
   police: police,
-  cctv: cctv
+  cctv: cctv,
 };
 const lat = 37.505776,
   lng = 127.052472;
@@ -37,9 +37,9 @@ const Location = () => {
   useEffect(() => {
     axios
       .get(`${NEAR_INFO_URL}?latitude=${lat}&longitude=${lng}`)
-      .then(res => mapLoad(res.data.results));
+      .then((res) => mapLoad(res.data.results));
 
-    const mapLoad = mapInfo => {
+    const mapLoad = (mapInfo) => {
       // console.log(mapInfo);
       // console.log(mapInfo.convenience.subway);
       kakao.maps.load(() => {
@@ -56,15 +56,16 @@ const Location = () => {
         );
         let map = new kakao.maps.Map(el, {
           center: new kakao.maps.LatLng(lat, lng),
-          level: 3
+          level: 3,
         });
         let centerMarker = new kakao.maps.Marker({
           map: map,
           position: new kakao.maps.LatLng(lat, lng),
-          image: centerMarkerImage
+          image: centerMarkerImage,
         });
         centerMarker.setMap(map);
         getNearInfo(mapInfo, map);
+        console.log(map.getCenter());
       });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -77,7 +78,7 @@ const Location = () => {
     bankBtn,
     pharmacyBtn,
     policeBtn,
-    cctvBtn
+    cctvBtn,
   ]);
 
   const getNearInfo = (mapInfo, map) => {
@@ -102,7 +103,7 @@ const Location = () => {
       let marker = new kakao.maps.Marker({
         map: map, //마커를 표시할 지도
         position: nearArr[i], // 마커를 표시할 위치
-        image: markerImage //마커 이미지
+        image: markerImage, //마커 이미지
       });
       marker.setMap(map);
     });
@@ -117,7 +118,7 @@ const Location = () => {
       let marker = new kakao.maps.Marker({
         map: map, //마커를 표시할 지도
         position: nearArr[i], // 마커를 표시할 위치
-        image: markerImage //마커 이미지
+        image: markerImage, //마커 이미지
       });
       marker.setMap(map);
     });
@@ -132,7 +133,7 @@ const Location = () => {
       let marker = new kakao.maps.Marker({
         map: map, //마커를 표시할 지도
         position: nearArr[i], // 마커를 표시할 위치
-        image: markerImage //마커 이미지
+        image: markerImage, //마커 이미지
       });
       marker.setMap(map);
     });
@@ -147,7 +148,7 @@ const Location = () => {
       let marker = new kakao.maps.Marker({
         map: map, //마커를 표시할 지도
         position: nearArr[i], // 마커를 표시할 위치
-        image: markerImage //마커 이미지
+        image: markerImage, //마커 이미지
       });
       marker.setMap(map);
     });
@@ -162,7 +163,7 @@ const Location = () => {
       let marker = new kakao.maps.Marker({
         map: map, //마커를 표시할 지도
         position: nearArr[i], // 마커를 표시할 위치
-        image: markerImage //마커 이미지
+        image: markerImage, //마커 이미지
       });
       marker.setMap(map);
     });
@@ -177,7 +178,7 @@ const Location = () => {
       let marker = new kakao.maps.Marker({
         map: map, //마커를 표시할 지도
         position: nearArr[i], // 마커를 표시할 위치
-        image: markerImage //마커 이미지
+        image: markerImage, //마커 이미지
       });
       marker.setMap(map);
     });
@@ -192,7 +193,7 @@ const Location = () => {
       let marker = new kakao.maps.Marker({
         map: map, //마커를 표시할 지도
         position: nearArr[i], // 마커를 표시할 위치
-        image: markerImage //마커 이미지
+        image: markerImage, //마커 이미지
       });
       marker.setMap(map);
     });
@@ -376,6 +377,6 @@ const Icon = styled.div`
   width: 44px;
   height: 44px;
   margin: 0px auto;
-  background: url(${props => imgs[props.iName]}) center center / cover no-repeat
-    transparent;
+  background: url(${(props) => imgs[props.iName]}) center center / cover
+    no-repeat transparent;
 `;
