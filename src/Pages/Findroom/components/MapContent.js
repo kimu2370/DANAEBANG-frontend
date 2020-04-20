@@ -1,6 +1,7 @@
 /*global kakao*/
 import React, { Component } from "react";
 import styled from "styled-components";
+import { DEFAULT_URL } from "Config";
 
 class MapContent extends Component {
   constructor() {
@@ -52,7 +53,7 @@ class MapContent extends Component {
 
   getRooms = clusterer => {
     fetch(
-      `http://52.78.11.154:8000/room/map?latitude=${this.state.lat}&longitude=${this.state.lng}&zoom=1&multi_room_type=1&multi_room_type=2&multi_room_type=3&selling_type=1&selling_type=2&room_size=0&room_size=50&maintenance_price=0&maintenance_price=10&deposit_range=0&deposit_range=20000&fee_range=0&fee_range=200`,
+      `${DEFAULT_URL}/room/map?latitude=${this.state.lat}&longitude=${this.state.lng}&zoom=1&multi_room_type=1&multi_room_type=2&multi_room_type=3&selling_type=1&selling_type=2&room_size=0&room_size=50&maintenance_price=0&maintenance_price=10&deposit_range=0&deposit_range=20000&fee_range=0&fee_range=200`,
       { method: "GET" }
     )
       .then(res => res.json())
@@ -72,7 +73,7 @@ class MapContent extends Component {
           //오버레이관련함수
           this.overlayContents = () => {
             fetch(
-              `http://52.78.11.154:8000/room/click?offset=1&limit=24&room_id=${marker.id}`,
+              `${DEFAULT_URL}/room/click?offset=1&limit=24&room_id=${marker.id}`,
               { method: "GET" }
             )
               .then(res => res.json())
