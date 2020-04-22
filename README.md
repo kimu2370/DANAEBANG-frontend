@@ -2,7 +2,7 @@
 
 - 통합 주거 플랫폼(부동산 정보 서비스)인 [다방](https://www.dabangapp.com/) 클론 프로젝트입니다.
 
-[![다방]()](https://youtu.be/DQS73OiWkKM)
+[![다방](https://user-images.githubusercontent.com/59649268/79964016-13924c00-84c5-11ea-8e89-ef78a093395a.jpg)](https://youtu.be/-EckvjpZX1c)
 
 
 ## 개발 인원 및 기간
