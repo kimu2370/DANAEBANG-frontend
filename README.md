@@ -5,6 +5,7 @@
 
 ## 데모영상
 [![다내방](https://user-images.githubusercontent.com/59649268/79964016-13924c00-84c5-11ea-8e89-ef78a093395a.jpg)](https://youtu.be/-EckvjpZX1c)
+(이미지를 누르시면 유튜브로 이동합니다.)
 
 
 ## 개발 인원 및 기간
