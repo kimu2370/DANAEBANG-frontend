@@ -2,15 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
-import { imgCloseModalAction } from "Redux/Actions/imgCloseModalAction";
-import { connect } from "react-redux";
+import { imgCloseModalAction } from "Redux/Actions";
+import { useDispatch } from "react-redux";
 import { clearFix } from "Styles/clearFix";
-const ImgViewModal = props => {
+
+const ImgViewModal = (props) => {
   const { imgUrl } = props;
+  const dispatch = useDispatch();
+
   return (
     <Modal show={props.showModal}>
       <Overlay>
-        <CloseBtn onClick={() => props.imgCloseModalAction()}>
+        <CloseBtn onClick={() => dispatch(imgCloseModalAction())}>
           <AiOutlineClose size={50} color={"white"} />
         </CloseBtn>
         <Wrap>
@@ -44,16 +47,11 @@ const ImgViewModal = props => {
     </Modal>
   );
 };
-const mapStateToProps = state => {
-  return {
-    showModal: state.imgShowModal
-  };
-};
 
-export default connect(mapStateToProps, { imgCloseModalAction })(ImgViewModal);
+export default ImgViewModal;
 
 const Modal = styled.div`
-  display: ${props => (props.show ? "block" : "none")};
+  display: ${(props) => (props.show ? "block" : "none")};
 `;
 
 const Overlay = styled.div`
@@ -128,7 +126,7 @@ const Item = styled.li`
 const ThumbnailImg = styled.div`
   width: 100%;
   height: 100%;
-  background: url(${props => props.src}) center center / cover no-repeat;
+  background: url(${(props) => props.src}) center center / cover no-repeat;
   ::after {
     content: "";
     display: block;
@@ -177,5 +175,5 @@ const Photo = styled.div`
   position: absolute;
   top: 0px;
   left: 0px;
-  background: url(${props => props.src}) center center / contain no-repeat;
+  background: url(${(props) => props.src}) center center / contain no-repeat;
 `;

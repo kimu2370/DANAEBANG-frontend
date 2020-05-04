@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled, { keyframes } from "styled-components";
-import { contactCloseModalAction } from "Redux/Actions/contactCloseModalAction";
+import { contactCloseModalAction } from "Redux/Actions";
 
-const ContactModal = props => {
+const ContactModal = (props) => {
   const { info } = props;
   // console.log(props);
   return (
@@ -63,10 +63,10 @@ const ContactModal = props => {
 // 전역 상태의 store에 있는 state를 이 컴포넌트에서 쓰고 싶다면 mapStateToProps인데 connect함수의 첫번째 인자이다.
 // connect 함수는 액션 함수를 두번째 인자로 받는다.
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   // console.log(state);
   return {
-    showModal: state.contactShowModal
+    showModal: state.contactShowModal,
   };
 };
 
@@ -75,7 +75,7 @@ export default connect(mapStateToProps, { contactCloseModalAction })(
 );
 
 const Modal = styled.div`
-  display: ${props => (props.show ? "block" : "none")};
+  display: ${(props) => (props.show ? "block" : "none")};
 `;
 
 const animation = keyframes`

@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { selectPyeongAction } from "Redux/Actions/selectPyeongAction";
+import { selectPyeongAction } from "Redux/Actions";
 
-const Spaces = props => {
+const Spaces = (props) => {
+  const dispatch = useDispatch();
   const [isMeter, setMeter] = useState(true);
   const [isPyeong, setPyeong] = useState(false);
   const [selectId, setSelectId] = useState(0);
-  const checkId = id => {
+
+  const checkId = (id) => {
     if (id === selectId) return true;
     else return false;
   };
   const { info, num } = props;
+
   useEffect(() => {
-    props.selectPyeongAction(num, info && info[selectId]);
-  }, [info, num, props, selectId]);
+    dispatch(selectPyeongAction(num, info && info[selectId]));
+  }, [info, num, selectId]);
 
   return (
     <Box>
@@ -66,17 +69,8 @@ const Spaces = props => {
     </Box>
   );
 };
-//계약면적일때, 공급면적일때
 
-const mapStateToProps = state => {
-  // console.log(state);
-  return {
-    householdNum: state.selectPyeong.householdNum,
-    pyeongInfo: state.selectPyeong.pyeongInfo
-  };
-};
-
-export default connect(mapStateToProps, { selectPyeongAction })(Spaces);
+export default Spaces;
 
 const Box = styled.div`
   width: 200px;
@@ -121,14 +115,14 @@ const Btn = styled.button`
   float: left;
   width: 35px;
   height: 28px;
-  color: ${props =>
+  color: ${(props) =>
     props.active ? "rgb(255, 255, 255)" : "rgb(102, 102, 102)"};
   font-size: 12px;
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.active ? "rgb(20, 118, 252)" : "rgb(255, 255, 255)"};
   border-width: 1px;
   border-style: solid;
-  border-color: ${props =>
+  border-color: ${(props) =>
     props.active ? "rgb(20, 118, 252)" : "rgb(213, 213, 213)"};
   border-image: initial;
 `;
@@ -147,7 +141,7 @@ const Item = styled.li`
   > p {
     display: block;
     width: 100%;
-    color: ${props =>
+    color: ${(props) =>
       props.active ? "rgb(20, 118, 252)" : "rgb(102, 102, 102)"};
     font-size: 15px;
     line-height: 48px;

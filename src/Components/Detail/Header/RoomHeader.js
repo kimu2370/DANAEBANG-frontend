@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { contactOpenModalAction } from "Redux/Actions/contactOpenModalAction";
+import { contactOpenModalAction } from "Redux/Actions";
 import { ReactComponent as Ichange } from "Components/Detail/Images/change.svg";
 import { ReactComponent as Icontact } from "Components/Detail/Images/contact.svg";
 import { ReactComponent as Icopy } from "Components/Detail/Images/copy.svg";
 import { ReactComponent as Iheart } from "Components/Detail/Images/heart.svg";
 import { ReactComponent as Ireport } from "Components/Detail/Images/report.svg";
 
-const RoomHeader = props => {
+const RoomHeader = (props) => {
   const [like, setLike] = useState(false);
   const [change, setChange] = useState(false);
   const { info } = props;
@@ -96,7 +96,7 @@ const RoomHeader = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { showModal: state.contactShowModal };
 };
 export default connect(mapStateToProps, { contactOpenModalAction })(RoomHeader);
@@ -115,7 +115,7 @@ const Summary = styled.ul`
   margin-bottom: 35px;
 `;
 const Li = styled.li`
-  ${props => props.marginLeft && "margin-left: 25px;"}
+  ${(props) => props.marginLeft && "margin-left: 25px;"}
   list-style: none;
   height: 72px;
   padding-right: 25px;
@@ -144,7 +144,8 @@ const InfoWrap = styled.div`
   height: 37px;
 `;
 const Info = styled.h1`
-  color: ${props => (props.buleColor ? `rgb(20, 118, 252)` : `rgb(34,34,34)`)};
+  color: ${(props) =>
+    props.buleColor ? `rgb(20, 118, 252)` : `rgb(34,34,34)`};
   font-size: 30px;
   line-height: 37px;
   font-weight: 500;
@@ -252,7 +253,7 @@ const Favorite = styled.p`
   margin-right: 4px;
   cursor: pointer;
   > svg > path {
-    ${props =>
+    ${(props) =>
       props.isClick &&
       `fill: #f63c4a;
     stroke: #f63c4a;`}

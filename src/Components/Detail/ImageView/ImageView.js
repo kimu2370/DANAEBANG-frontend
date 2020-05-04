@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { imgOpenModalAction } from "Redux/Actions/imgOpenModalAction";
-import { connect } from "react-redux";
+import { imgOpenModalAction } from "Redux/Actions";
+import { useDispatch } from "react-redux";
 import { clearFix } from "Styles/clearFix";
-const ImageView = props => {
+
+const ImageView = (props) => {
   const { imgUrl } = props;
   const noImg = "https://www.dabangapp.com/static/media/no_image.91d4ad2d.svg";
+  const dispatch = useDispatch();
+
   return (
-    <Box onClick={() => props.imgOpenModalAction()}>
+    <Box onClick={() => dispatch(imgOpenModalAction())}>
       <ImgView>
         <BigView src={imgUrl && imgUrl[0]} />
         {imgUrl && imgUrl.length > 1 ? (
@@ -33,7 +36,7 @@ const ImageView = props => {
   );
 };
 
-export default connect(null, { imgOpenModalAction })(ImageView);
+export default ImageView;
 
 const Box = styled.div`
   width: 1180px;
@@ -65,7 +68,7 @@ const BigView = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: url(${props => props.src || props.noImg}) center center
+    background: url(${(props) => props.src || props.noImg}) center center
       no-repeat;
   }
   ::after {
@@ -73,7 +76,7 @@ const BigView = styled.div`
     height: 100%;
     top: 0px;
     left: 0px;
-    background: url(${props => props.src}) center center / cover no-repeat;
+    background: url(${(props) => props.src}) center center / cover no-repeat;
   }
   ::before,
   ::after {
@@ -94,7 +97,7 @@ const SmallView = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: url(${props => props.src || props.noImg}) center center
+    background: url(${(props) => props.src || props.noImg}) center center
       no-repeat;
   }
   ::after {
@@ -107,7 +110,7 @@ const SmallView = styled.div`
     border-style: solid;
     border-color: rgb(217, 218, 220);
     border-image: initial;
-    background: url(${props => props.src}) center center / cover no-repeat;
+    background: url(${(props) => props.src}) center center / cover no-repeat;
   }
   ::before,
   ::after {

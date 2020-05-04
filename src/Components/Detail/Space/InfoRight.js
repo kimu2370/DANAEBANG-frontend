@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -7,7 +7,9 @@ import styled from "styled-components";
 import { TRADE_HISTORY_URL } from "Config";
 import { clearFix } from "Styles/clearFix";
 
-const InfoRight = props => {
+const InfoRight = () => {
+  const pyeongData = useSelector((store) => store.selectPyeong);
+
   const [tradeInfo, setTradeInfo] = useState({});
   const [isSell, setSell] = useState(true);
   const [isLease, setLease] = useState(false);
@@ -21,7 +23,7 @@ const InfoRight = props => {
     const fetchTradeHistory = async () => {
       try {
         const result = await axios.get(
-          `${TRADE_HISTORY_URL}?id=${props.pyeongInfo.complex_space_info_id}`
+          `${TRADE_HISTORY_URL}?id=${pyeongData.pyeongInfo.complex_space_info_id}`
         );
         setTradeInfo(result.data.result);
       } catch (error) {
@@ -29,10 +31,10 @@ const InfoRight = props => {
       }
     };
 
-    props.pyeongInfo instanceof Object &&
-      props.pyeongInfo.hasOwnProperty("complex_space_info_id") &&
+    pyeongData instanceof Object &&
+      pyeongData.pyeongInfo.hasOwnProperty("complex_space_info_id") &&
       fetchTradeHistory();
-  }, [props.pyeongInfo]);
+  }, [pyeongData]);
 
   // lease 전세, rent 월세, selling 매매
 
@@ -40,12 +42,12 @@ const InfoRight = props => {
   const getSellingData = () => {
     const [...selling_history] = tradeInfo.selling_history;
     const data = [];
-    selling_history.map(item => {
+    selling_history.map((item) => {
       return data.push([
         new Date(
           item.date.slice(0, 4) + "." + item.date.slice(4) + ".01"
         ).getTime(),
-        Number((item.average_deposit / 10000).toFixed(1))
+        Number((item.average_deposit / 10000).toFixed(1)),
       ]);
     });
     return data;
@@ -54,12 +56,12 @@ const InfoRight = props => {
   const getLeaseData = () => {
     const [...lease_history] = tradeInfo.lease_history;
     const data = [];
-    lease_history.map(item => {
+    lease_history.map((item) => {
       return data.push([
         new Date(
           item.date.slice(0, 4) + "." + item.date.slice(4) + ".01"
         ).getTime(),
-        Number((item.average_deposit / 10000).toFixed(1))
+        Number((item.average_deposit / 10000).toFixed(1)),
       ]);
     });
     return data;
@@ -68,7 +70,7 @@ const InfoRight = props => {
   const getRentData = () => {
     const [...rent_history] = tradeInfo.rent_history;
     const data = [];
-    rent_history.map(item => {
+    rent_history.map((item) => {
       return data.push([
         new Date(
           item.histories[0].date.slice(0, 4) +
@@ -77,7 +79,7 @@ const InfoRight = props => {
             "." +
             "01"
         ).getTime(),
-        Number((item.histories[0].deposit / 10000).toFixed(1))
+        Number((item.histories[0].deposit / 10000).toFixed(1)),
       ]);
     });
     return data;
@@ -93,14 +95,14 @@ const InfoRight = props => {
   const options = {
     chart: {
       width: 424,
-      height: 280
+      height: 280,
     },
     plotOptions: {
       series: {
         showInLegend: false,
         type: "line",
         marker: {
-          enabled: true
+          enabled: true,
         },
         point: {
           events: {
@@ -118,13 +120,13 @@ const InfoRight = props => {
                 data = realL.filter((item, i) => i === curIndex);
               }
               setRealData(data);
-            }
-          }
-        }
-      }
+            },
+          },
+        },
+      },
     },
     title: {
-      text: ""
+      text: "",
     },
     colors: ["rgb(135, 232, 198)", "rgb(50, 137, 255)"],
     tooltip: {
@@ -142,44 +144,44 @@ const InfoRight = props => {
           this.y
         }억</b> <br/>
         <b>${isRent ? "월세 " + rentNum[0].histories[0].price : ""}</b>`;
-      }
+      },
     },
     credits: {
-      enabled: false
+      enabled: false,
     },
     xAxis: {
       title: {
-        text: ""
+        text: "",
       },
 
       type: "datetime",
       labels: {
         style: {
           fontSize: "14px",
-          color: "black"
+          color: "black",
         },
         formatter: function() {
           let year = String(new Date(this.value).getFullYear()).slice(2);
           let month = new Date(this.value).getMonth();
           return `${year}년 ${month + 1}월`;
         },
-        rotation: -10
+        rotation: -10,
       },
       crosshair: {
         width: 2,
-        color: "rgba(0,0,0,0.3)"
-      }
+        color: "rgba(0,0,0,0.3)",
+      },
     },
     yAxis: {
       title: {
-        text: ""
+        text: "",
       },
       labels: {
         format: "{value}억",
         style: {
-          fontSize: "15px"
-        }
-      }
+          fontSize: "15px",
+        },
+      },
     },
     series: [
       {
@@ -189,9 +191,9 @@ const InfoRight = props => {
             ? getSellingData()
             : isLease
             ? getLeaseData()
-            : isRent && getRentData()
-      }
-    ]
+            : isRent && getRentData(),
+      },
+    ],
   };
   // console.log(
   //   realData[0] instanceof Object &&
@@ -200,13 +202,13 @@ const InfoRight = props => {
   // );
   return (
     <>
-      {props.pyeongInfo && (
+      {pyeongData.pyeongInfo && (
         <Box>
           <Header>실거래 시세</Header>
           <Wrap>
             <Text>면적</Text>
             <SpaceInfoWrap>
-              <SpaceName>{props.pyeongInfo.pyeong_type}</SpaceName>
+              <SpaceName>{pyeongData.pyeongInfo.pyeong_type}</SpaceName>
               <BtnWrap>
                 <Btn
                   onClick={() => {
@@ -369,13 +371,7 @@ const InfoRight = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    pyeongInfo: state.selectPyeong.pyeongInfo
-  };
-};
-
-export default connect(mapStateToProps)(InfoRight);
+export default InfoRight;
 
 const Box = styled.div`
   float: left;
@@ -436,7 +432,7 @@ const Btn = styled.button`
   height: 34px;
   font-size: 13px;
   float: left;
-  ${props =>
+  ${(props) =>
     props.active
       ? `line-height: 32px;
         color: rgb(34, 34, 34);
