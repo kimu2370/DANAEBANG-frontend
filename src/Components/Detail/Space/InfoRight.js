@@ -6,6 +6,7 @@ import HighchartsReact from "highcharts-react-official";
 import styled from "styled-components";
 import { TRADE_HISTORY_URL } from "Config";
 import { clearFix } from "Styles/clearFix";
+
 const InfoRight = props => {
   const [tradeInfo, setTradeInfo] = useState({});
   const [isSell, setSell] = useState(true);

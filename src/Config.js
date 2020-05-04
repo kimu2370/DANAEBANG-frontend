@@ -1,10 +1,12 @@
-export const DEFAULT_URL = "http://13.124.55.9:8000";
-export const ROOM_DETAIL_URL = "http://13.124.55.9:8000/room/detail?type=room";
+export const DEFAULT_URL = "http://13.125.124.191:8000";
+export const ROOM_DETAIL_URL =
+  "http://13.125.124.191:8000/room/detail?type=room";
 export const COMPLEX_DETAIL_URL =
-  "http://13.124.55.9:8000/room/detail?type=complex";
-export const FIND_ROOM_URL = "http://13.124.55.9:8000/room/list";
-export const NEAR_INFO_URL = "http://13.124.55.9:8000/room/near";
-export const TRADE_HISTORY_URL = "http://13.124.55.9:8000/room/trade-history";
+  "http://13.125.124.191:8000/room/detail?type=complex";
+export const FIND_ROOM_URL = "http://13.125.124.191:8000/room/list";
+export const NEAR_INFO_URL = "http://13.125.124.191:8000/room/near";
+export const TRADE_HISTORY_URL =
+  "http://13.125.124.191:8000/room/trade-history";
 // 52.78.11.154:8000
 //10.58.2.68:8000
 //10.58.6.60:8000

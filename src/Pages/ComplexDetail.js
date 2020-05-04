@@ -13,13 +13,13 @@ import ComplexPrice from "Components/Detail/Price/ComplexPrice";
 import Space from "Components/Detail/Space/Space";
 import Location from "Components/Detail/Location";
 
-const ComplexDetail = props => {
+const ComplexDetail = (props) => {
   const [info, setInfo] = useState({});
   // console.log();
   useEffect(() => {
     axios
       .get(`${COMPLEX_DETAIL_URL}&id=${props.match.params.id}`)
-      .then(res => setInfo(res.data.complex_detail));
+      .then((res) => setInfo(res.data.complex_detail));
   }, [props.match.params.id]);
 
   // info => 단지 거래 상세 정보
