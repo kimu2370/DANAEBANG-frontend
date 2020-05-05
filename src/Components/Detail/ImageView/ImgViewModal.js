@@ -3,17 +3,19 @@ import styled from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { imgCloseModalAction } from "Redux/Actions";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { clearFix } from "Styles/clearFix";
 
 const ImgViewModal = (props) => {
   const { imgUrl } = props;
+
+  const showModal = useSelector((store) => store.imgShowModal);
   const dispatch = useDispatch();
 
   return (
-    <Modal show={props.showModal}>
+    <Modal show={showModal}>
       <Overlay>
-        <CloseBtn onClick={() => dispatch(imgCloseModalAction())}>
+        <CloseBtn onClick={() => dispatch(imgCloseModalAction(showModal))}>
           <AiOutlineClose size={50} color={"white"} />
         </CloseBtn>
         <Wrap>

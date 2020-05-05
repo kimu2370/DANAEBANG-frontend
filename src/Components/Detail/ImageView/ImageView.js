@@ -1,16 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { imgOpenModalAction } from "Redux/Actions";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { clearFix } from "Styles/clearFix";
 
 const ImageView = (props) => {
   const { imgUrl } = props;
   const noImg = "https://www.dabangapp.com/static/media/no_image.91d4ad2d.svg";
+  const showModal = useSelector((store) => store.imgShowModal);
   const dispatch = useDispatch();
 
   return (
-    <Box onClick={() => dispatch(imgOpenModalAction())}>
+    <Box onClick={() => dispatch(imgOpenModalAction(showModal))}>
       <ImgView>
         <BigView src={imgUrl && imgUrl[0]} />
         {imgUrl && imgUrl.length > 1 ? (
